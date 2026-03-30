@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hạt Rang — Cà phê cổ điển</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #2c1810;
+      --cream: #f5efe6;
+      --parchment: #ebe3d5;
+      --gold: #8b6914;
+      --rust: #6b4423;
+      --border: #c4a574;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Libre Baskerville", Georgia, serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      letter-spacing: 0.35em;
+      font-size: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    header.hero {
+      min-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background:
+        linear-gradient(180deg, rgba(245, 239, 230, 0.92) 0%, rgba(245, 239, 230, 0.97) 100%),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(196, 165, 116, 0.08) 2px,
+          rgba(196, 165, 116, 0.08) 4px
+        ),
+        var(--parchment);
+      border-bottom: 3px double var(--border);
+    }
+
+    .hero-badge {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--rust);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      color: var(--ink);
+      line-height: 1.1;
+      max-width: 14ch;
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      max-width: 32rem;
+      font-style: italic;
+      color: var(--rust);
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.85rem 2rem;
+      border: 2px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    main {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    section h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    section .lead {
+      text-align: center;
+      color: var(--rust);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--parchment);
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 0 rgba(44, 24, 16, 0.06);
+    }
+
+    .card h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      color: var(--rust);
+    }
+
+    .card p {
+      font-size: 0.92rem;
+    }
+
+    ul.features {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    ul.features li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.92rem;
+    }
+
+    ul.features li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.65rem;
+      top: 0.35rem;
+    }
+
+    .contact-wrap {
+      border: 3px double var(--border);
+      padding: 2rem;
+      background: linear-gradient(180deg, #faf6ef 0%, var(--parchment) 100%);
+    }
+
+    .form-row {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.4rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--cream);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    textarea {
+      min-height: 7rem;
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      font-family: inherit;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 3px double var(--border);
+      background: var(--parchment);
+      font-size: 0.8rem;
+      color: var(--rust);
+    }
+
+    footer address {
+      font-style: normal;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="hero-badge">Từ hạt đến tách</p>
+    <h1>Hạt Rang</h1>
+    <p class="ornament">◇ ◆ ◇</p>
+    <p class="hero-sub">Cà phê rang tay, hương vị đậm đà theo phong cách cổ điển — dành cho những ai trân trọng từng ngụm.</p>
+    <a class="btn" href="#lien-he">Đặt mua &amp; liên hệ</a>
+  </header>
+
+  <main>
+    <section id="gioi-thieu" aria-labelledby="heading-gioi-thieu">
+      <h2 id="heading-gioi-thieu">Về chúng tôi</h2>
+      <p class="lead">Chúng tôi chọn hạt Arabica &amp; Robusta, rang nhỏ lô để giữ trọn hương.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Nguồn gốc</h3>
+          <p>Hạt từ vùng cao nguyên, thu hoạch theo mùa. Mỗi mẻ rang được ghi nhật ký nhiệt độ và thời gian để hương vị ổn định.</p>
+        </div>
+        <div class="card">
+          <h3>Cách phục vụ</h3>
+          <p>Giao hạt rang hoặc bột xay theo nhu cầu. Tư vấn mức độ rang (nhẹ, vừa, đậm) phù hợp pha phin, pha máy hoặc pour-over.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="san-pham" aria-labelledby="heading-san-pham">
+      <h2 id="heading-san-pham">Sản phẩm gợi ý</h2>
+      <p class="lead">Ba dòng phổ biến — có thể đổi tên và giá theo thực tế của bạn.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Phố Cũ — Blend hậu vị ngọt</h3>
+          <p>Pha phin truyền thống, vị cân bằng, ít chua.</p>
+          <ul class="features">
+            <li>Rang vừa (medium)</li>
+            <li>Gói 250g / 500g</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Đồi Gió — Arabica đơn origin</h3>
+          <p>Hương hoa quả nhẹ, thích hợp pour-over.</p>
+          <ul class="features">
+            <li>Rang nhẹ đến vừa</li>
+            <li>Gói 250g</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="lien-he" aria-labelledby="heading-lien-he">
+      <h2 id="heading-lien-he">Liên hệ đặt hàng</h2>
+      <p class="lead">Điền form bên dưới; bạn có thể nối backend sau (email, CRM, v.v.).</p>
+      <div class="contact-wrap">
+        <form action="#" method="post">
+          <div class="form-row">
+            <label for="name">Họ và tên</label>
+            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="ban@email.com">
+          </div>
+          <div class="form-row">
+            <label for="phone">Điện thoại</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="09xx xxx xxx">
+          </div>
+          <div class="form-row">
+            <label for="product">Sản phẩm quan tâm</label>
+            <select id="product" name="product">
+              <option value="">— Chọn —</option>
+              <option value="pho-cu">Phố Cũ — Blend</option>
+              <option value="doi-gio">Đồi Gió — Arabica</option>
+              <option value="khac">Khác / tư vấn</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="message">Nội dung</label>
+            <textarea id="message" name="message" placeholder="Số lượng, địa chỉ giao hàng, ghi chú…"></textarea>
+          </div>
+          <button type="submit">Gửi yêu cầu</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Hạt Rang</strong> — Cà phê rang tay</p>
+    <address>Địa chỉ &amp; giờ mở cửa: cập nhật tại đây</address>
+    <p class="ornament" style="margin-top: 1rem;">◇ ◆ ◇</p>
+  </footer>
+</body>
+</html>
