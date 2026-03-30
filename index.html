@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hạt Rang — Cà phê cổ điển</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Cà Phê Tây Nguyên - 48 — Xay nhuyễn đóng bịch · Arabica &amp; Robusta</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet">
   <style>
     :root {
-      --ink: #2c1810;
-      --cream: #f5efe6;
-      --parchment: #ebe3d5;
-      --gold: #8b6914;
-      --rust: #6b4423;
-      --border: #c4a574;
+      --dark: #1a1512;
+      --dark-soft: #2a221c;
+      --cream: #f2e9e1;
+      --cream-card: #faf5f0;
+      --copper: #a67c52;
+      --copper-hover: #8f6843;
+      --text: #1a1512;
+      --text-muted: #5c4f45;
+      --radius: 10px;
+      --radius-lg: 14px;
+      --nav-h: 9.5rem;
+      --topbar-h: 2.25rem;
     }
 
-    * {
+    @media (min-width: 1024px) {
+      :root {
+        --nav-h: 4.5rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --topbar-h: 3.25rem;
+        --nav-h: 11rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      :root {
+        --nav-h: 12rem;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -25,331 +55,1043 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--topbar-h) + var(--nav-h) + 0.35rem);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
     }
 
     body {
-      font-family: "Libre Baskerville", Georgia, serif;
+      font-family: "Montserrat", system-ui, -apple-system, sans-serif;
       background: var(--cream);
-      color: var(--ink);
-      line-height: 1.65;
-      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 0.95rem;
+      overflow-x: hidden;
     }
 
-    .ornament {
-      text-align: center;
-      color: var(--gold);
-      letter-spacing: 0.35em;
-      font-size: 0.75rem;
-      margin: 1rem 0;
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
 
-    header.hero {
-      min-height: 72vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 3rem 1.5rem;
-      background:
-        linear-gradient(180deg, rgba(245, 239, 230, 0.92) 0%, rgba(245, 239, 230, 0.97) 100%),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 2px,
-          rgba(196, 165, 116, 0.08) 2px,
-          rgba(196, 165, 116, 0.08) 4px
-        ),
-        var(--parchment);
-      border-bottom: 3px double var(--border);
-    }
-
-    .hero-badge {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.4em;
-      color: var(--rust);
-      margin-bottom: 1.25rem;
-    }
-
-    h1 {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      color: var(--ink);
-      line-height: 1.1;
-      max-width: 14ch;
-    }
-
-    .hero-sub {
-      margin-top: 1.5rem;
-      max-width: 32rem;
-      font-style: italic;
-      color: var(--rust);
-      font-size: 1.05rem;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.85rem 2rem;
-      border: 2px solid var(--ink);
-      background: transparent;
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    a {
+      color: inherit;
       text-decoration: none;
-      transition: background 0.2s, color 0.2s;
     }
 
-    .btn:hover {
-      background: var(--ink);
+    .container {
+      width: min(1180px, 100% - 1.25rem);
+      margin-inline: auto;
+      padding-inline: max(0px, env(safe-area-inset-left)) max(0px, env(safe-area-inset-right));
+    }
+
+    @media (min-width: 480px) {
+      .container {
+        width: min(1180px, 100% - 2rem);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        width: min(1180px, 100% - 3rem);
+      }
+    }
+
+    /* —— Top bar —— */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+      min-height: var(--topbar-h);
+      background: var(--dark);
+      color: rgba(242, 233, 225, 0.75);
+      font-size: clamp(0.62rem, 2.5vw, 0.7rem);
+      letter-spacing: clamp(0.04em, 0.8vw, 0.08em);
+      text-transform: uppercase;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem 1rem;
+      row-gap: 0.25rem;
+      padding: 0.35rem max(0.75rem, env(safe-area-inset-left)) 0.35rem max(0.75rem, env(safe-area-inset-right));
+    }
+
+    .top-bar a {
+      padding: 0.35rem 0.25rem;
+    }
+
+    .top-bar a:hover {
       color: var(--cream);
     }
 
-    main {
-      max-width: 52rem;
+    /* —— Main nav —— */
+    .site-nav {
+      position: fixed;
+      top: var(--topbar-h);
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--dark);
+      border-bottom: 1px solid rgba(166, 124, 82, 0.25);
+      padding-block: 0.65rem;
+      padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right));
+    }
+
+    .nav-inner {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-    }
-
-    section {
-      margin-bottom: 3.5rem;
-    }
-
-    section h2 {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 2rem;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 0.5rem;
-    }
-
-    section .lead {
-      text-align: center;
-      color: var(--rust);
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    .grid-2 {
       display: grid;
-      gap: 2rem;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      align-items: center;
+      justify-items: center;
+      text-align: center;
     }
 
-    @media (min-width: 640px) {
-      .grid-2 {
+    @media (min-width: 1024px) {
+      .nav-inner {
+        grid-template-columns: 1fr auto 1fr;
+        justify-items: stretch;
+        text-align: left;
+        gap: 1rem;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem 0.65rem;
+      list-style: none;
+      font-size: clamp(0.65rem, 2.8vw, 0.72rem);
+      font-weight: 600;
+      letter-spacing: clamp(0.06em, 0.8vw, 0.12em);
+      text-transform: uppercase;
+      color: rgba(242, 233, 225, 0.88);
+      max-width: 100%;
+    }
+
+    .nav-links a {
+      padding: 0.4rem 0.2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-links {
+        gap: 0.35rem 1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-links--left {
+        justify-content: flex-start;
+      }
+
+      .nav-links--right {
+        justify-content: flex-end;
+      }
+    }
+
+    .nav-links a:hover {
+      color: var(--copper);
+    }
+
+    .logo {
+      order: -1;
+      text-align: center;
+    }
+
+    @media (min-width: 1024px) {
+      .logo {
+        order: 0;
+      }
+    }
+
+    .logo-script {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-size: clamp(1.05rem, 3.2vw, 1.55rem);
+      color: var(--cream);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      max-width: min(95vw, 26rem);
+      margin-inline: auto;
+    }
+
+    .logo-sub {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(0.55rem, 2vw, 0.62rem);
+      letter-spacing: clamp(0.12em, 1.5vw, 0.35em);
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-top: 0.15rem;
+      padding-inline: 0.5rem;
+      line-height: 1.35;
+    }
+
+    .nav-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-actions {
+        justify-content: flex-end;
+      }
+    }
+
+    .btn-order {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 1.25rem;
+      background: var(--copper);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-order:hover {
+      background: var(--copper-hover);
+    }
+
+    /* offset for fixed headers */
+    main {
+      padding-top: calc(var(--topbar-h) + var(--nav-h));
+    }
+
+    /* —— Hero —— */
+    .hero-visual {
+      position: relative;
+      min-height: min(78vh, 720px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(0.85rem, 4vw, 1.25rem) 5.5rem;
+      margin-top: calc(-1 * (var(--topbar-h) + var(--nav-h)));
+      padding-top: calc(clamp(1.5rem, 4vw, 3rem) + var(--topbar-h) + var(--nav-h));
+      background:
+        linear-gradient(180deg, rgba(26, 21, 18, 0.45) 0%, rgba(26, 21, 18, 0.75) 100%),
+        url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1920&q=80") center / cover no-repeat;
+      color: #fff;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), 50% 100%, 0 calc(100% - 48px));
+    }
+
+    @media (min-width: 768px) {
+      .hero-visual {
+        min-height: min(88vh, 820px);
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 72px), 50% 100%, 0 calc(100% - 72px));
+        padding-bottom: 6.5rem;
+      }
+    }
+
+    .hero-visual .kicker {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(0.65rem, 2.5vw, 0.72rem);
+      letter-spacing: clamp(0.2em, 2vw, 0.35em);
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+      padding-inline: 0.5rem;
+    }
+
+    .hero-visual h1 {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.65rem, 7.5vw, 3.75rem);
+      line-height: 1.15;
+      max-width: min(18ch, 92vw);
+      padding-inline: 0.35rem;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-visual .hero-lead {
+      margin-top: 1.25rem;
+      max-width: 36rem;
+      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+      opacity: 0.92;
+      font-weight: 400;
+    }
+
+    .hero-visual .btn-ghost {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 1.75rem;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .hero-visual .btn-ghost:hover {
+      background: #fff;
+      color: var(--dark);
+    }
+
+    /* —— About strip —— */
+    .about-strip {
+      padding: clamp(1.75rem, 5vw, 2.5rem) 0 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: clamp(0.85rem, 2.8vw, 0.92rem);
+      max-width: 40rem;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    .about-strip strong {
+      color: var(--dark);
+    }
+
+    /* —— Featured —— */
+    .section-featured {
+      padding: 2rem 0 3.5rem;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(0.95rem, 3.5vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: clamp(0.08em, 1.2vw, 0.2em);
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--dark);
+      margin-bottom: 2rem;
+      padding-inline: 0.5rem;
+      line-height: 1.35;
+    }
+
+    .featured-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 640px) and (max-width: 767px) {
+      .featured-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .featured-grid .drink-card:last-child {
+        grid-column: 1 / -1;
+        max-width: min(100%, 420px);
+        margin-inline: auto;
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .featured-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .featured-grid .drink-card:last-child {
+        grid-column: auto;
+        max-width: none;
+        margin-inline: 0;
+      }
+    }
+
+    .drink-card {
+      background: var(--cream-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(26, 21, 18, 0.08);
+      border: 1px solid rgba(166, 124, 82, 0.15);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .drink-card__img {
+      aspect-ratio: 1;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .drink-card__body {
+      padding: 1.35rem 1.25rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drink-card__body h3 {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-size: clamp(1.05rem, 2.8vw, 1.2rem);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .drink-card__body p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .btn-dark {
+      margin-top: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 1.25rem;
+      background: var(--dark);
+      color: var(--cream);
+      font-family: inherit;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+
+    .btn-dark:hover {
+      opacity: 0.92;
+    }
+
+    /* —— Promo banners —— */
+    .promo-row {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .promo-row {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    .card {
-      background: var(--parchment);
-      padding: 1.75rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 0 rgba(44, 24, 16, 0.06);
-    }
-
-    .card h3 {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.35rem;
-      margin-bottom: 0.75rem;
-      color: var(--rust);
-    }
-
-    .card p {
-      font-size: 0.92rem;
-    }
-
-    ul.features {
-      list-style: none;
-      margin-top: 1rem;
-    }
-
-    ul.features li {
+    .promo-card {
       position: relative;
-      padding-left: 1.25rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.92rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: clamp(200px, 42vw, 260px);
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(1.1rem, 4vw, 1.75rem);
+      background-size: cover;
+      background-position: center;
     }
 
-    ul.features li::before {
-      content: "✦";
+    .promo-card::before {
+      content: "";
       position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-size: 0.65rem;
-      top: 0.35rem;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(26, 21, 18, 0.85) 100%);
     }
 
-    .contact-wrap {
-      border: 3px double var(--border);
-      padding: 2rem;
-      background: linear-gradient(180deg, #faf6ef 0%, var(--parchment) 100%);
+    .promo-card__inner {
+      position: relative;
+      z-index: 1;
+      color: #fff;
     }
 
-    .form-row {
+    .promo-card__inner h3 {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      margin-bottom: 0.35rem;
+      line-height: 1.2;
+    }
+
+    .promo-card__inner p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .btn-copper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 1.35rem;
+      background: var(--copper);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-copper:hover {
+      background: var(--copper-hover);
+    }
+
+    /* —— Dark band: deal + visual + newsletter —— */
+    .dark-band {
+      position: relative;
+      padding: clamp(2.5rem, 8vw, 4rem) 0;
+      background:
+        linear-gradient(165deg, rgba(26, 21, 18, 0.92) 0%, rgba(42, 34, 28, 0.95) 100%),
+        url("https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1600&q=80") center / cover fixed;
+      color: var(--cream);
+    }
+
+    @media (max-width: 767px) {
+      .dark-band {
+        background-attachment: scroll;
+      }
+    }
+
+    .dark-band__grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 992px) {
+      .dark-band__grid {
+        grid-template-columns: 1fr 260px 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .cream-card {
+      background: var(--cream-card);
+      color: var(--text);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.25rem, 4vw, 1.75rem) clamp(1.1rem, 3vw, 1.5rem);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .cream-card h3 {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 3.5vw, 1.45rem);
+      margin-bottom: 0.65rem;
+      color: var(--dark);
+      line-height: 1.25;
+    }
+
+    .cream-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
       margin-bottom: 1.25rem;
     }
 
-    label {
+    .cream-card .btn-copper {
+      width: 100%;
+    }
+
+    @media (min-width: 480px) {
+      .cream-card .btn-copper {
+        width: auto;
+      }
+    }
+
+    .dark-band__visual {
+      display: flex;
+      justify-content: center;
+      order: -1;
+    }
+
+    @media (min-width: 992px) {
+      .dark-band__visual {
+        order: 0;
+      }
+    }
+
+    .circle-frame {
+      width: min(240px, 70vw);
+      height: min(240px, 70vw);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--copper);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .circle-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .newsletter-form .field {
+      margin-bottom: 0.85rem;
+    }
+
+    .newsletter-form label {
       display: block;
-      font-size: 0.75rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .newsletter-form input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 0.85rem;
+      border: 1px solid rgba(26, 21, 18, 0.15);
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 16px;
+      background: #fff;
+    }
+
+    @media (min-width: 480px) {
+      .newsletter-form input {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* —— Contact —— */
+    .contact-section {
+      padding: clamp(2.5rem, 8vw, 4rem) 0;
+      background: var(--cream);
+    }
+
+    .contact-section .section-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-section .sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: clamp(0.82rem, 2.5vw, 0.9rem);
+      margin-bottom: 2rem;
+      padding-inline: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .contact-wrap {
+      max-width: 36rem;
+      margin: 0 auto;
+      background: var(--cream-card);
+      border: 1px solid rgba(166, 124, 82, 0.2);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.25rem, 4vw, 2rem);
+      box-shadow: 0 8px 32px rgba(26, 21, 18, 0.06);
+    }
+
+    .form-row {
+      margin-bottom: 1.1rem;
+    }
+
+    .contact-wrap label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 0.4rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
     }
 
-    input,
-    textarea,
-    select {
+    .contact-wrap input,
+    .contact-wrap textarea,
+    .contact-wrap select {
       width: 100%;
-      padding: 0.75rem 0.85rem;
-      border: 1px solid var(--border);
-      background: var(--cream);
+      min-height: 44px;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid rgba(26, 21, 18, 0.12);
+      border-radius: var(--radius);
       font-family: inherit;
-      font-size: 0.95rem;
-      color: var(--ink);
+      font-size: 16px;
+      background: #fff;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: 2px solid var(--gold);
-      outline-offset: 2px;
+    @media (min-width: 480px) {
+
+      .contact-wrap input,
+      .contact-wrap textarea,
+      .contact-wrap select {
+        font-size: 0.9rem;
+      }
     }
 
-    textarea {
-      min-height: 7rem;
+    .contact-wrap textarea {
+      min-height: 6.5rem;
       resize: vertical;
     }
 
-    button[type="submit"] {
+    .contact-wrap input:focus,
+    .contact-wrap textarea:focus,
+    .contact-wrap select:focus {
+      outline: 2px solid var(--copper);
+      outline-offset: 1px;
+    }
+
+    .contact-wrap button[type="submit"] {
       width: 100%;
-      padding: 1rem;
-      margin-top: 0.5rem;
-      background: var(--ink);
+      min-height: 48px;
+      margin-top: 0.25rem;
+      background: var(--dark);
       color: var(--cream);
       border: none;
+      border-radius: var(--radius);
       font-family: inherit;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
       transition: opacity 0.2s;
     }
 
-    button[type="submit"]:hover {
+    .contact-wrap button[type="submit"]:hover {
       opacity: 0.9;
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      border-top: 3px double var(--border);
-      background: var(--parchment);
-      font-size: 0.8rem;
-      color: var(--rust);
+    /* —— Footer —— */
+    .site-footer {
+      background: var(--dark);
+      color: rgba(242, 233, 225, 0.75);
+      padding: clamp(2rem, 6vw, 3rem) max(1rem, env(safe-area-inset-right)) max(2.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+      font-size: clamp(0.78rem, 2.2vw, 0.82rem);
     }
 
-    footer address {
+    .footer-grid {
+      display: grid;
+      gap: 2.25rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 640px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+      }
+    }
+
+    .footer-col h4 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(0.62rem, 2vw, 0.68rem);
+      font-weight: 700;
+      letter-spacing: clamp(0.1em, 1.2vw, 0.18em);
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col p,
+    .footer-col address {
+      line-height: 1.7;
       font-style: normal;
-      margin-top: 0.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col a:hover {
+      color: var(--copper);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-row a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(166, 124, 82, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .social-row a:hover {
+      background: var(--copper);
+      border-color: var(--copper);
+      color: #fff;
+    }
+
+    .footer-logo {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-size: clamp(0.95rem, 2.8vw, 1.25rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--cream);
+      line-height: 1.25;
+    }
+
+    .footer-copy {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      font-size: 0.72rem;
+      opacity: 0.65;
     }
   </style>
 </head>
+
 <body>
-  <header class="hero">
-    <p class="hero-badge">Từ hạt đến tách</p>
-    <h1>Hạt Rang</h1>
-    <p class="ornament">◇ ◆ ◇</p>
-    <p class="hero-sub">Cà phê rang tay, hương vị đậm đà theo phong cách cổ điển — dành cho những ai trân trọng từng ngụm.</p>
-    <a class="btn" href="#lien-he">Đặt mua &amp; liên hệ</a>
-  </header>
+  <div class="top-bar" aria-label="Liên kết phụ">
+    <a href="#lien-he">Giao hàng toàn quốc</a>
+    <span aria-hidden="true">·</span>
+    <a href="tel:">Hotline 032 635 4304</a>
+  </div>
+
+  <nav class="site-nav" aria-label="Chính">
+    <div class="nav-inner container">
+      <ul class="nav-links nav-links--left">
+        <li><a href="#top">Trang chủ</a></li>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#san-pham">Sản phẩm</a></li>
+        <li><a href="#san-pham">Cửa hàng</a></li>
+      </ul>
+      <a href="#top" class="logo">
+        <div class="logo-script">Cà Phê Tây Nguyên - 48</div>
+        <div class="logo-sub">xay nhuyễn · đóng bịch</div>
+      </a>
+      <div class="nav-actions">
+        <ul class="nav-links nav-links--right">
+          <li><a href="#lien-he">Liên hệ</a></li>
+        </ul>
+        <a class="btn-order" href="#lien-he">Đặt ngay</a>
+      </div>
+    </div>
+  </nav>
 
   <main>
-    <section id="gioi-thieu" aria-labelledby="heading-gioi-thieu">
-      <h2 id="heading-gioi-thieu">Về chúng tôi</h2>
-      <p class="lead">Chúng tôi chọn hạt Arabica &amp; Robusta, rang nhỏ lô để giữ trọn hương.</p>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Nguồn gốc</h3>
-          <p>Hạt từ vùng cao nguyên, thu hoạch theo mùa. Mỗi mẻ rang được ghi nhật ký nhiệt độ và thời gian để hương vị ổn định.</p>
+    <section id="top" class="hero-visual" aria-labelledby="hero-heading">
+      <p class="kicker">Cà Phê Tây Nguyên - 48</p>
+      <h1 id="hero-heading">Arabica &amp; Robusta<br>xay nhuyễn, đóng bịch</h1>
+      <p class="hero-lead">Hạt chọn lọc, rang nhỏ lô, xay mịn đúng độ — đóng bịch kín hơi để bạn pha phin, pha máy hay
+        filter tiện lợi mỗi ngày.</p>
+      <a class="btn-ghost" href="#san-pham">Xem bịch cà phê</a>
+    </section>
+
+    <div class="container">
+      <p id="gioi-thieu" class="about-strip"><strong>Cà Phê Tây Nguyên - 48</strong> chuyên <strong>cà phê bột xay
+          nhuyễn đóng
+          bịch</strong>,
+        hai dòng hạt <strong>Arabica</strong> (thơm, hậu ngọt) và <strong>Robusta</strong> (đậm, ít chua), cùng blend
+        cân bằng.
+        Bạn chọn mức rang và độ xay; bịch có dung tích phổ biến 250g / 500g — giao tận nơi, hướng dẫn pha phù hợp.</p>
+
+      <section id="san-pham" class="section-featured" aria-labelledby="feat-heading">
+        <h2 id="feat-heading" class="section-title">Bịch xay nhuyễn</h2>
+        <div class="featured-grid">
+          <article class="drink-card">
+            <img class="drink-card__img"
+              src="https://images.unsplash.com/photo-1605711599412-775918dbe770?auto=format&fit=crop&w=800&q=80"
+              width="800" height="800" alt="Bịch cà phê Arabica xay nhuyễn trên gỗ">
+            <div class="drink-card__body">
+              <h3>Arabica xay nhuyễn</h3>
+              <p>Bột mịn từ hạt Arabica — hương thơm rõ, hậu ngọt nhẹ, ít đắng gắt. Hợp pha phin, V60, máy espresso gia
+                đình.</p>
+              <a class="btn-dark" href="#lien-he">Đặt mua</a>
+            </div>
+          </article>
+          <article class="drink-card">
+            <img class="drink-card__img"
+              src="https://images.unsplash.com/photo-1544486864-3087e2e20d91?auto=format&fit=crop&w=800&q=80"
+              width="800" height="800" alt="Bịch đóng cà phê Robusta xay nhuyễn">
+            <div class="drink-card__body">
+              <h3>Robusta xay nhuyễn</h3>
+              <p>Đậm vị, crema cao khi pha phin — gu truyền thống Việt Nam. Xay đúng cỡ cho phin nhôm / máy.</p>
+              <a class="btn-dark" href="#lien-he">Đặt mua</a>
+            </div>
+          </article>
+          <article class="drink-card">
+            <img class="drink-card__img"
+              src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80"
+              width="800" height="800" alt="Blend Arabica và Robusta">
+            <div class="drink-card__body">
+              <h3>Blend Arabica + Robusta</h3>
+              <p>Pha trộn tỉ lệ cân bằng — vừa thơm vừa đậm, ít chua. Một bịch cho cả nhà uống phin sáng.</p>
+              <a class="btn-dark" href="#lien-he">Đặt mua</a>
+            </div>
+          </article>
         </div>
-        <div class="card">
-          <h3>Cách phục vụ</h3>
-          <p>Giao hạt rang hoặc bột xay theo nhu cầu. Tư vấn mức độ rang (nhẹ, vừa, đậm) phù hợp pha phin, pha máy hoặc pour-over.</p>
+
+        <div class="promo-row">
+          <div class="promo-card"
+            style="background-image: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80')">
+            <div class="promo-card__inner">
+              <h3>Combo 3 bịch</h3>
+              <p>Mua 3 bịch xay nhuyễn (cùng hoặc khác dòng) — ưu đãi theo tháng. Ghi rõ khối lượng khi đặt.</p>
+              <a class="btn-copper" href="#lien-he">Nhận ưu đãi</a>
+            </div>
+          </div>
+          <div class="promo-card"
+            style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80')">
+            <div class="promo-card__inner">
+              <h3>Set quà 2 bịch</h3>
+              <p>1 bịch Arabica + 1 bịch Robusta (hoặc 2 blend), kèm hướng dẫn pha — gói quà tặng gọn nhẹ.</p>
+              <a class="btn-copper" href="#lien-he">Mua ngay</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="dark-band" id="uudai" aria-labelledby="deal-heading">
+      <div class="container dark-band__grid">
+        <div class="cream-card">
+          <h3 id="deal-heading">Ưu đãi trong ngày</h3>
+          <p>Đặt trước 10h — freeship nội thành cho đơn từ 300k. Combo 1 bịch Arabica + 1 bịch Robusta giảm thêm theo
+            chương trình tháng.</p>
+          <a class="btn-copper" href="#lien-he">Áp dụng ngay</a>
+        </div>
+        <div class="dark-band__visual" id="cau-chuyen">
+          <div class="circle-frame">
+            <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?auto=format&fit=crop&w=600&q=80"
+              width="600" height="600" alt="Pha cà phê từ bịch xay nhuyễn">
+          </div>
+        </div>
+        <div class="cream-card">
+          <h3>Bản tin Tây Nguyên - 48</h3>
+          <p>Nhận mẹo pha bịch xay, mẻ rang mới và mã giảm giá — không spam.</p>
+          <form class="newsletter-form" action="https://formspree.io/f/xeepgovq" method="POST">
+            <input type="hidden" name="_subject" value="[Cà Phê Tây Nguyên - 48] Đăng ký bản tin">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+              style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+            <div class="field">
+              <label for="nl-email">Email</label>
+              <input type="email" id="nl-email" name="email" required autocomplete="email" placeholder="ban@email.com">
+            </div>
+            <button type="submit" class="btn-copper" style="width:100%">Đăng ký</button>
+          </form>
         </div>
       </div>
     </section>
 
-    <section id="san-pham" aria-labelledby="heading-san-pham">
-      <h2 id="heading-san-pham">Sản phẩm gợi ý</h2>
-      <p class="lead">Ba dòng phổ biến — có thể đổi tên và giá theo thực tế của bạn.</p>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Phố Cũ — Blend hậu vị ngọt</h3>
-          <p>Pha phin truyền thống, vị cân bằng, ít chua.</p>
-          <ul class="features">
-            <li>Rang vừa (medium)</li>
-            <li>Gói 250g / 500g</li>
-          </ul>
+    <section id="lien-he" class="contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading" class="section-title">Liên hệ đặt hàng</h2>
+        <p class="sub">Gửi form — tin nhắn sẽ tới email bạn đã cấu hình trên Formspree.</p>
+        <div class="contact-wrap">
+          <form action="https://formspree.io/f/xeepgovq" method="POST">
+            <input type="hidden" name="_subject" value="[Cà Phê Tây Nguyên - 48] Liên hệ đặt hàng">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+              style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+            <div class="form-row">
+              <label for="name">Họ và tên</label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="ban@email.com">
+            </div>
+            <div class="form-row">
+              <label for="phone">Điện thoại</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="09xx xxx xxx">
+            </div>
+            <div class="form-row">
+              <label for="product">Sản phẩm quan tâm</label>
+              <select id="product" name="product">
+                <option value="">— Chọn —</option>
+                <option value="arabica-xay">Arabica xay nhuyễn (bịch)</option>
+                <option value="robusta-xay">Robusta xay nhuyễn (bịch)</option>
+                <option value="blend">Blend Arabica + Robusta (bịch)</option>
+                <option value="khac">Khác / tư vấn độ xay</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="message">Nội dung</label>
+              <textarea id="message" name="message"
+                placeholder="Số bịch, khối lượng (250g / 500g), địa chỉ giao hàng, ghi chú…"></textarea>
+            </div>
+            <button type="submit">Gửi yêu cầu</button>
+          </form>
         </div>
-        <div class="card">
-          <h3>Đồi Gió — Arabica đơn origin</h3>
-          <p>Hương hoa quả nhẹ, thích hợp pour-over.</p>
-          <ul class="features">
-            <li>Rang nhẹ đến vừa</li>
-            <li>Gói 250g</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="lien-he" aria-labelledby="heading-lien-he">
-      <h2 id="heading-lien-he">Liên hệ đặt hàng</h2>
-      <p class="lead">Điền form bên dưới; bạn có thể nối backend sau (email, CRM, v.v.).</p>
-      <div class="contact-wrap">
-        <form action="#" method="post">
-          <div class="form-row">
-            <label for="name">Họ và tên</label>
-            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
-          </div>
-          <div class="form-row">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="email" placeholder="ban@email.com">
-          </div>
-          <div class="form-row">
-            <label for="phone">Điện thoại</label>
-            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="09xx xxx xxx">
-          </div>
-          <div class="form-row">
-            <label for="product">Sản phẩm quan tâm</label>
-            <select id="product" name="product">
-              <option value="">— Chọn —</option>
-              <option value="pho-cu">Phố Cũ — Blend</option>
-              <option value="doi-gio">Đồi Gió — Arabica</option>
-              <option value="khac">Khác / tư vấn</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="message">Nội dung</label>
-            <textarea id="message" name="message" placeholder="Số lượng, địa chỉ giao hàng, ghi chú…"></textarea>
-          </div>
-          <button type="submit">Gửi yêu cầu</button>
-        </form>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p><strong>Hạt Rang</strong> — Cà phê rang tay</p>
-    <address>Địa chỉ &amp; giờ mở cửa: cập nhật tại đây</address>
-    <p class="ornament" style="margin-top: 1rem;">◇ ◆ ◇</p>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">Cà Phê Tây Nguyên - 48</div>
+        <div class="social-row" aria-label="Mạng xã hội">
+          <a href="https://www.facebook.com/profile.php?id=61575467911052" aria-label="Facebook">FB</a>
+          <a href="https://www.instagram.com/cafe.taynguyen48/" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Sản phẩm</h4>
+        <ul>
+          <li><a href="#san-pham">Arabica xay nhuyễn</a></li>
+          <li><a href="#san-pham">Robusta xay nhuyễn</a></li>
+          <li><a href="#san-pham">Blend bịch</a></li>
+          <li><a href="#uudai">Ưu đãi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <p>Điện thoại: 032 635 4304<br>Email: ntngochai2210@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Thương hiệu</h4>
+        <p>Gu không vội — hương không thỏa hiệp.<br>© <span id="y"></span> Cà Phê Tây Nguyên - 48.</p>
+      </div>
+    </div>
+    <p class="footer-copy container">Cà Phê Tây Nguyên - 48 © <span id="y2"></span></p>
   </footer>
+
+  <script>
+    (function () {
+      var y = String(new Date().getFullYear());
+      document.getElementById("y").textContent = y;
+      document.getElementById("y2").textContent = y;
+    })();
+  </script>
 </body>
+
 </html>
