@@ -32,16 +32,41 @@
       }
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 1023px) {
       :root {
-        --topbar-h: 3.25rem;
-        --nav-h: 11rem;
+        --nav-h: 2.85rem;
       }
     }
 
-    @media (max-width: 360px) {
+    @media (max-width: 520px) {
       :root {
-        --nav-h: 12rem;
+        --topbar-h: 2.65rem;
+        --nav-h: 2.75rem;
+      }
+    }
+
+    /* Thu gọn header khi scroll (class do JS gắn vào <html>) */
+    html.header-compact {
+      --topbar-h: 1.65rem;
+    }
+
+    @media (min-width: 1024px) {
+      html.header-compact {
+        --topbar-h: 1.75rem;
+        --nav-h: 3.35rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      html.header-compact {
+        --nav-h: 2.45rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      html.header-compact {
+        --topbar-h: 2.2rem;
+        --nav-h: 2.35rem;
       }
     }
 
@@ -61,6 +86,21 @@
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
+      }
+
+      .nav-panel,
+      .nav-toggle__bar,
+      .nav-scrim {
+        transition: none;
+      }
+
+      .top-bar,
+      .site-nav,
+      .logo-script,
+      .logo-sub,
+      .nav-toggle,
+      .btn-order {
+        transition: none;
       }
     }
 
@@ -132,6 +172,22 @@
       color: var(--cream);
     }
 
+    .top-bar,
+    .site-nav {
+      transition: padding 0.28s ease, min-height 0.28s ease, font-size 0.28s ease;
+    }
+
+    html.header-compact .top-bar {
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+      row-gap: 0.1rem;
+      font-size: clamp(0.55rem, 2.2vw, 0.65rem);
+    }
+
+    html.header-compact .top-bar a {
+      padding: 0.2rem 0.2rem;
+    }
+
     /* —— Main nav —— */
     .site-nav {
       position: fixed;
@@ -145,32 +201,273 @@
       padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right));
     }
 
+    html.header-compact .site-nav {
+      padding-block: 0.4rem;
+    }
+
+    @media (max-width: 1023px) {
+      .site-nav {
+        padding-block: 0.3rem;
+        padding-inline: max(0.4rem, env(safe-area-inset-left)) max(0.4rem, env(safe-area-inset-right));
+      }
+
+      .nav-inner {
+        grid-template-columns: auto 1fr;
+        grid-template-areas: "toggle trail";
+      }
+
+      .logo {
+        display: none !important;
+      }
+
+      .nav-trailing .btn-order {
+        min-height: 30px;
+        padding: 0 0.5rem;
+        font-size: 0.55rem;
+      }
+    }
+
+    @media (max-width: 1023px) and (min-width: 400px) {
+      .nav-trailing .btn-order {
+        min-height: 32px;
+        padding: 0 0.6rem;
+        font-size: 0.58rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .top-bar {
+        padding: 0.22rem max(0.5rem, env(safe-area-inset-left)) 0.22rem max(0.5rem, env(safe-area-inset-right));
+        gap: 0.25rem 0.65rem;
+        row-gap: 0.12rem;
+        font-size: clamp(0.56rem, 2.4vw, 0.64rem);
+      }
+
+      .top-bar a {
+        padding: 0.2rem 0.15rem;
+      }
+    }
+
     .nav-inner {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas: "toggle logo trail";
       align-items: center;
-      justify-items: center;
+      column-gap: 0.35rem;
       text-align: center;
+    }
+
+    .nav-toggle {
+      grid-area: toggle;
+      justify-self: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+
+    .nav-toggle:focus-visible {
+      outline: 2px solid var(--copper);
+      outline-offset: 2px;
+    }
+
+    .nav-toggle__bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .site-nav.is-open .nav-toggle__bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .site-nav.is-open .nav-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.is-open .nav-toggle__bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width: 1023px) {
+      .nav-toggle {
+        width: 38px;
+        height: 38px;
+        gap: 4px;
+      }
+
+      .nav-toggle__bar {
+        width: 20px;
+      }
+
+      .site-nav.is-open .nav-toggle__bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .site-nav.is-open .nav-toggle__bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-toggle {
+        display: none;
+      }
+    }
+
+    .logo {
+      grid-area: logo;
+      justify-self: center;
+      text-align: center;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .nav-trailing {
+      grid-area: trail;
+      justify-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      min-width: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-trailing {
+        display: none;
+      }
     }
 
     @media (min-width: 1024px) {
       .nav-inner {
         grid-template-columns: 1fr auto 1fr;
+        grid-template-areas: "left logo right";
         justify-items: stretch;
         text-align: left;
-        gap: 1rem;
+        column-gap: 1rem;
+      }
+
+      .nav-links--left.nav-links--desktop {
+        grid-area: left;
+        justify-content: flex-start;
+      }
+
+      .logo {
+        grid-area: logo;
+        justify-self: center;
+        text-align: center;
+      }
+
+      .nav-actions {
+        grid-area: right;
+      }
+    }
+
+    .nav-panel {
+      position: fixed;
+      top: calc(var(--topbar-h) + var(--nav-h));
+      left: 0;
+      bottom: 0;
+      width: min(18rem, 88vw);
+      max-width: 100%;
+      background: var(--dark);
+      border-right: 1px solid rgba(166, 124, 82, 0.3);
+      padding: 1.25rem 1rem 1.5rem;
+      z-index: 1002;
+      transform: translateX(-100%);
+      visibility: hidden;
+      transition: transform 0.28s ease, visibility 0.28s;
+      overflow-y: auto;
+      box-shadow: 8px 0 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-panel.is-open {
+      transform: translateX(0);
+      visibility: visible;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-panel {
+        display: none;
+      }
+    }
+
+    .nav-panel__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .nav-panel__links a {
+      display: block;
+      padding: 0.85rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(242, 233, 225, 0.92);
+      border-radius: var(--radius);
+    }
+
+    .nav-panel__links a:hover,
+    .nav-panel__links a:focus-visible {
+      color: var(--copper);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-scrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: calc(var(--topbar-h) + var(--nav-h));
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .nav-scrim.is-open {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-scrim {
+        display: none !important;
+      }
+    }
+
+    body.nav-locked {
+      overflow: hidden;
+    }
+
+    /* Mobile: luôn ẩn menu desktop (tránh bị .nav-links ghi đè display) */
+    @media (max-width: 1023px) {
+
+      .nav-links.nav-links--desktop,
+      .nav-actions {
+        display: none !important;
       }
     }
 
     .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem 0.65rem;
       list-style: none;
       font-size: clamp(0.65rem, 2.8vw, 0.72rem);
       font-weight: 600;
@@ -185,34 +482,24 @@
     }
 
     @media (min-width: 1024px) {
-      .nav-links {
+      .nav-links.nav-links--desktop {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         gap: 0.35rem 1rem;
       }
-    }
 
-    @media (min-width: 1024px) {
-      .nav-links--left {
+      .nav-links--left.nav-links--desktop {
         justify-content: flex-start;
       }
 
-      .nav-links--right {
+      .nav-links--right.nav-links--desktop {
         justify-content: flex-end;
       }
     }
 
     .nav-links a:hover {
       color: var(--copper);
-    }
-
-    .logo {
-      order: -1;
-      text-align: center;
-    }
-
-    @media (min-width: 1024px) {
-      .logo {
-        order: 0;
-      }
     }
 
     .logo-script {
@@ -238,16 +525,16 @@
     }
 
     .nav-actions {
-      display: flex;
+      display: none;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       gap: 0.75rem;
     }
 
     @media (min-width: 1024px) {
       .nav-actions {
-        justify-content: flex-end;
+        display: flex;
       }
     }
 
@@ -271,6 +558,88 @@
 
     .btn-order:hover {
       background: var(--copper-hover);
+    }
+
+    .logo-script,
+    .logo-sub,
+    .nav-toggle,
+    .btn-order {
+      transition: font-size 0.28s ease, letter-spacing 0.28s ease, margin 0.28s ease, min-height 0.28s ease,
+        padding 0.28s ease, width 0.28s ease, height 0.28s ease;
+    }
+
+    @media (min-width: 1024px) {
+      html.header-compact .logo-script {
+        font-size: clamp(0.88rem, 2.4vw, 1.22rem);
+      }
+
+      html.header-compact .logo-sub {
+        font-size: clamp(0.46rem, 1.4vw, 0.52rem);
+        margin-top: 0.06rem;
+      }
+    }
+
+    html.header-compact .nav-toggle {
+      width: 40px;
+      height: 40px;
+    }
+
+    html.header-compact .btn-order {
+      min-height: 34px;
+      padding: 0 0.85rem;
+      font-size: 0.62rem;
+    }
+
+    html.header-compact .nav-trailing .btn-order {
+      min-height: 32px;
+      padding: 0 0.5rem;
+      font-size: 0.56rem;
+    }
+
+    @media (min-width: 400px) {
+      html.header-compact .nav-trailing .btn-order {
+        min-height: 34px;
+        padding: 0 0.65rem;
+        font-size: 0.6rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      html.header-compact .nav-toggle {
+        width: 34px;
+        height: 34px;
+        gap: 3px;
+      }
+
+      html.header-compact .nav-toggle__bar {
+        width: 18px;
+      }
+
+      html.header-compact .site-nav.is-open .nav-toggle__bar:nth-child(1) {
+        transform: translateY(5px) rotate(45deg);
+      }
+
+      html.header-compact .site-nav.is-open .nav-toggle__bar:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg);
+      }
+
+      html.header-compact .site-nav {
+        padding-block: 0.22rem;
+      }
+
+      html.header-compact .nav-trailing .btn-order {
+        min-height: 28px;
+        padding: 0 0.42rem;
+        font-size: 0.52rem;
+      }
+    }
+
+    @media (max-width: 1023px) and (min-width: 400px) {
+      html.header-compact .nav-trailing .btn-order {
+        min-height: 30px;
+        padding: 0 0.5rem;
+        font-size: 0.55rem;
+      }
     }
 
     /* offset for fixed headers */
@@ -886,9 +1255,15 @@
     <a href="tel:">Hotline 032 635 4304</a>
   </div>
 
-  <nav class="site-nav" aria-label="Chính">
+  <nav class="site-nav" id="site-nav" aria-label="Chính">
     <div class="nav-inner container">
-      <ul class="nav-links nav-links--left">
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel"
+        aria-label="Mở menu điều hướng">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links nav-links--left nav-links--desktop">
         <li><a href="#top">Trang chủ</a></li>
         <li><a href="#gioi-thieu">Giới thiệu</a></li>
         <li><a href="#san-pham">Sản phẩm</a></li>
@@ -898,13 +1273,26 @@
         <div class="logo-script">Cà Phê Tây Nguyên - 48</div>
         <div class="logo-sub">xay nhuyễn · đóng bịch</div>
       </a>
+      <div class="nav-trailing">
+        <a class="btn-order" href="#lien-he">Đặt ngay</a>
+      </div>
       <div class="nav-actions">
-        <ul class="nav-links nav-links--right">
+        <ul class="nav-links nav-links--right nav-links--desktop">
           <li><a href="#lien-he">Liên hệ</a></li>
         </ul>
         <a class="btn-order" href="#lien-he">Đặt ngay</a>
       </div>
     </div>
+    <div id="nav-panel" class="nav-panel" role="dialog" aria-modal="true" aria-label="Menu chính" aria-hidden="true">
+      <ul class="nav-panel__links">
+        <li><a href="#top">Trang chủ</a></li>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#san-pham">Sản phẩm</a></li>
+        <li><a href="#san-pham">Cửa hàng</a></li>
+        <li><a href="#lien-he">Liên hệ</a></li>
+      </ul>
+    </div>
+    <div id="nav-scrim" class="nav-scrim" aria-hidden="true"></div>
   </nav>
 
   <main>
@@ -1088,8 +1476,69 @@
   <script>
     (function () {
       var y = String(new Date().getFullYear());
-      document.getElementById("y").textContent = y;
-      document.getElementById("y2").textContent = y;
+      var elY = document.getElementById("y");
+      var elY2 = document.getElementById("y2");
+      if (elY) elY.textContent = y;
+      if (elY2) elY2.textContent = y;
+    })();
+    (function () {
+      var nav = document.getElementById("site-nav");
+      var toggle = document.getElementById("nav-toggle");
+      var panel = document.getElementById("nav-panel");
+      var scrim = document.getElementById("nav-scrim");
+      if (!nav || !toggle || !panel || !scrim) return;
+
+      function setOpen(open) {
+        nav.classList.toggle("is-open", open);
+        panel.classList.toggle("is-open", open);
+        scrim.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        panel.setAttribute("aria-hidden", open ? "false" : "true");
+        scrim.setAttribute("aria-hidden", open ? "false" : "true");
+        document.body.classList.toggle("nav-locked", open);
+        toggle.setAttribute("aria-label", open ? "Đóng menu điều hướng" : "Mở menu điều hướng");
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(!nav.classList.contains("is-open"));
+      });
+      scrim.addEventListener("click", function () {
+        setOpen(false);
+      });
+      panel.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () {
+          setOpen(false);
+        });
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setOpen(false);
+      });
+    })();
+    (function () {
+      var root = document.documentElement;
+      var threshold = 40;
+      var compact = false;
+
+      function sync() {
+        var y = window.scrollY || root.scrollTop;
+        var next = y > threshold;
+        if (next === compact) return;
+        compact = next;
+        root.classList.toggle("header-compact", next);
+      }
+
+      var scheduled = false;
+      function onScroll() {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(function () {
+          scheduled = false;
+          sync();
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      sync();
     })();
   </script>
 </body>
