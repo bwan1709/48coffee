@@ -4,1540 +4,418 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Cà Phê Tây Nguyên</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --dark: #1a1512;
-      --dark-soft: #2a221c;
-      --cream: #f2e9e1;
-      --cream-card: #faf5f0;
-      --copper: #a67c52;
-      --copper-hover: #8f6843;
-      --text: #1a1512;
-      --text-muted: #5c4f45;
-      --radius: 10px;
-      --radius-lg: 14px;
-      --nav-h: 9.5rem;
-      --topbar-h: 2.25rem;
-    }
-
-    @media (min-width: 1024px) {
-      :root {
-        --nav-h: 4.5rem;
-      }
-    }
-
-    @media (max-width: 1023px) {
-      :root {
-        --nav-h: 2.85rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-      :root {
-        --topbar-h: 2.65rem;
-        --nav-h: 2.75rem;
-      }
-    }
-
-    /* Thu gọn header khi scroll (class do JS gắn vào <html>) */
-    html.header-compact {
-      --topbar-h: 1.65rem;
-    }
-
-    @media (min-width: 1024px) {
-      html.header-compact {
-        --topbar-h: 1.75rem;
-        --nav-h: 3.35rem;
-      }
-    }
-
-    @media (max-width: 1023px) {
-      html.header-compact {
-        --nav-h: 2.45rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-      html.header-compact {
-        --topbar-h: 2.2rem;
-        --nav-h: 2.35rem;
-      }
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--topbar-h) + var(--nav-h) + 0.35rem);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .nav-panel,
-      .nav-toggle__bar,
-      .nav-scrim {
-        transition: none;
-      }
-
-      .top-bar,
-      .site-nav,
-      .logo-script,
-      .logo-sub,
-      .nav-toggle,
-      .btn-order {
-        transition: none;
-      }
-    }
-
-    body {
-      font-family: "Montserrat", system-ui, -apple-system, sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 0.95rem;
-      overflow-x: hidden;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1180px, 100% - 1.25rem);
-      margin-inline: auto;
-      padding-inline: max(0px, env(safe-area-inset-left)) max(0px, env(safe-area-inset-right));
-    }
-
-    @media (min-width: 480px) {
-      .container {
-        width: min(1180px, 100% - 2rem);
-      }
-    }
-
-    @media (min-width: 768px) {
-      .container {
-        width: min(1180px, 100% - 3rem);
-      }
-    }
-
-    /* —— Top bar —— */
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1001;
-      min-height: var(--topbar-h);
-      background: var(--dark);
-      color: rgba(242, 233, 225, 0.75);
-      font-size: clamp(0.62rem, 2.5vw, 0.7rem);
-      letter-spacing: clamp(0.04em, 0.8vw, 0.08em);
-      text-transform: uppercase;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem 1rem;
-      row-gap: 0.25rem;
-      padding: 0.35rem max(0.75rem, env(safe-area-inset-left)) 0.35rem max(0.75rem, env(safe-area-inset-right));
-    }
-
-    .top-bar a {
-      padding: 0.35rem 0.25rem;
-    }
-
-    .top-bar a:hover {
-      color: var(--cream);
-    }
-
-    .top-bar,
-    .site-nav {
-      transition: padding 0.28s ease, min-height 0.28s ease, font-size 0.28s ease;
-    }
-
-    html.header-compact .top-bar {
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
-      row-gap: 0.1rem;
-      font-size: clamp(0.55rem, 2.2vw, 0.65rem);
-    }
-
-    html.header-compact .top-bar a {
-      padding: 0.2rem 0.2rem;
-    }
-
-    /* —— Main nav —— */
-    .site-nav {
-      position: fixed;
-      top: var(--topbar-h);
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: var(--dark);
-      border-bottom: 1px solid rgba(166, 124, 82, 0.25);
-      padding-block: 0.65rem;
-      padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right));
-    }
-
-    html.header-compact .site-nav {
-      padding-block: 0.4rem;
-    }
-
-    @media (max-width: 1023px) {
-      .site-nav {
-        padding-block: 0.3rem;
-        padding-inline: max(0.4rem, env(safe-area-inset-left)) max(0.4rem, env(safe-area-inset-right));
-      }
-
-      .nav-inner {
-        grid-template-columns: auto 1fr;
-        grid-template-areas: "toggle trail";
-      }
-
-      .logo {
-        display: none !important;
-      }
-
-      .nav-trailing .btn-order {
-        min-height: 30px;
-        padding: 0 0.5rem;
-        font-size: 0.55rem;
-      }
-    }
-
-    @media (max-width: 1023px) and (min-width: 400px) {
-      .nav-trailing .btn-order {
-        min-height: 32px;
-        padding: 0 0.6rem;
-        font-size: 0.58rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .top-bar {
-        padding: 0.22rem max(0.5rem, env(safe-area-inset-left)) 0.22rem max(0.5rem, env(safe-area-inset-right));
-        gap: 0.25rem 0.65rem;
-        row-gap: 0.12rem;
-        font-size: clamp(0.56rem, 2.4vw, 0.64rem);
-      }
-
-      .top-bar a {
-        padding: 0.2rem 0.15rem;
-      }
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      grid-template-areas: "toggle logo trail";
-      align-items: center;
-      column-gap: 0.35rem;
-      text-align: center;
-    }
-
-    .nav-toggle {
-      grid-area: toggle;
-      justify-self: start;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      padding: 0;
-      border: none;
-      background: transparent;
-      color: var(--cream);
-      cursor: pointer;
-      border-radius: var(--radius);
-      flex-shrink: 0;
-    }
-
-    .nav-toggle:focus-visible {
-      outline: 2px solid var(--copper);
-      outline-offset: 2px;
-    }
-
-    .nav-toggle__bar {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: currentColor;
-      border-radius: 1px;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .site-nav.is-open .nav-toggle__bar:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .site-nav.is-open .nav-toggle__bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .site-nav.is-open .nav-toggle__bar:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    @media (max-width: 1023px) {
-      .nav-toggle {
-        width: 38px;
-        height: 38px;
-        gap: 4px;
-      }
-
-      .nav-toggle__bar {
-        width: 20px;
-      }
-
-      .site-nav.is-open .nav-toggle__bar:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-      }
-
-      .site-nav.is-open .nav-toggle__bar:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .nav-toggle {
-        display: none;
-      }
-    }
-
-    .logo {
-      grid-area: logo;
-      justify-self: center;
-      text-align: center;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    .nav-trailing {
-      grid-area: trail;
-      justify-self: stretch;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 100%;
-      min-width: 0;
-    }
-
-    @media (min-width: 1024px) {
-      .nav-trailing {
-        display: none;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .nav-inner {
-        grid-template-columns: 1fr auto 1fr;
-        grid-template-areas: "left logo right";
-        justify-items: stretch;
-        text-align: left;
-        column-gap: 1rem;
-      }
-
-      .nav-links--left.nav-links--desktop {
-        grid-area: left;
-        justify-content: flex-start;
-      }
-
-      .logo {
-        grid-area: logo;
-        justify-self: center;
-        text-align: center;
-      }
-
-      .nav-actions {
-        grid-area: right;
-      }
-    }
-
-    .nav-panel {
-      position: fixed;
-      top: calc(var(--topbar-h) + var(--nav-h));
-      left: 0;
-      bottom: 0;
-      width: min(18rem, 88vw);
-      max-width: 100%;
-      background: var(--dark);
-      border-right: 1px solid rgba(166, 124, 82, 0.3);
-      padding: 1.25rem 1rem 1.5rem;
-      z-index: 1002;
-      transform: translateX(-100%);
-      visibility: hidden;
-      transition: transform 0.28s ease, visibility 0.28s;
-      overflow-y: auto;
-      box-shadow: 8px 0 32px rgba(0, 0, 0, 0.35);
-    }
-
-    .nav-panel.is-open {
-      transform: translateX(0);
-      visibility: visible;
-    }
-
-    @media (min-width: 1024px) {
-      .nav-panel {
-        display: none;
-      }
-    }
-
-    .nav-panel__links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .nav-panel__links a {
-      display: block;
-      padding: 0.85rem 0.75rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(242, 233, 225, 0.92);
-      border-radius: var(--radius);
-    }
-
-    .nav-panel__links a:hover,
-    .nav-panel__links a:focus-visible {
-      color: var(--copper);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-scrim {
-      display: none;
-      position: fixed;
-      inset: 0;
-      top: calc(var(--topbar-h) + var(--nav-h));
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 1001;
-      opacity: 0;
-      transition: opacity 0.28s ease;
-    }
-
-    .nav-scrim.is-open {
-      display: block;
-      opacity: 1;
-    }
-
-    @media (min-width: 1024px) {
-      .nav-scrim {
-        display: none !important;
-      }
-    }
-
-    body.nav-locked {
-      overflow: hidden;
-    }
-
-    /* Mobile: luôn ẩn menu desktop (tránh bị .nav-links ghi đè display) */
-    @media (max-width: 1023px) {
-
-      .nav-links.nav-links--desktop,
-      .nav-actions {
-        display: none !important;
-      }
-    }
-
-    .nav-links {
-      list-style: none;
-      font-size: clamp(0.65rem, 2.8vw, 0.72rem);
-      font-weight: 600;
-      letter-spacing: clamp(0.06em, 0.8vw, 0.12em);
-      text-transform: uppercase;
-      color: rgba(242, 233, 225, 0.88);
-      max-width: 100%;
-    }
-
-    .nav-links a {
-      padding: 0.4rem 0.2rem;
-    }
-
-    @media (min-width: 1024px) {
-      .nav-links.nav-links--desktop {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.35rem 1rem;
-      }
-
-      .nav-links--left.nav-links--desktop {
-        justify-content: flex-start;
-      }
-
-      .nav-links--right.nav-links--desktop {
-        justify-content: flex-end;
-      }
-    }
-
-    .nav-links a:hover {
-      color: var(--copper);
-    }
-
-    .logo-script {
-      font-family: "Montserrat", system-ui, sans-serif;
-      font-size: clamp(1.05rem, 3.2vw, 1.55rem);
-      color: var(--cream);
-      line-height: 1.2;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      max-width: min(95vw, 26rem);
-      margin-inline: auto;
-    }
-
-    .logo-sub {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(0.55rem, 2vw, 0.62rem);
-      letter-spacing: clamp(0.12em, 1.5vw, 0.35em);
-      text-transform: uppercase;
-      color: var(--copper);
-      margin-top: 0.15rem;
-      padding-inline: 0.5rem;
-      line-height: 1.35;
-    }
-
-    .nav-actions {
-      display: none;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.75rem;
-    }
-
-    @media (min-width: 1024px) {
-      .nav-actions {
-        display: flex;
-      }
-    }
-
-    .btn-order {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0 1.25rem;
-      background: var(--copper);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-order:hover {
-      background: var(--copper-hover);
-    }
-
-    .logo-script,
-    .logo-sub,
-    .nav-toggle,
-    .btn-order {
-      transition: font-size 0.28s ease, letter-spacing 0.28s ease, margin 0.28s ease, min-height 0.28s ease,
-        padding 0.28s ease, width 0.28s ease, height 0.28s ease;
-    }
-
-    @media (min-width: 1024px) {
-      html.header-compact .logo-script {
-        font-size: clamp(0.88rem, 2.4vw, 1.22rem);
-      }
-
-      html.header-compact .logo-sub {
-        font-size: clamp(0.46rem, 1.4vw, 0.52rem);
-        margin-top: 0.06rem;
-      }
-    }
-
-    html.header-compact .nav-toggle {
-      width: 40px;
-      height: 40px;
-    }
-
-    html.header-compact .btn-order {
-      min-height: 34px;
-      padding: 0 0.85rem;
-      font-size: 0.62rem;
-    }
-
-    html.header-compact .nav-trailing .btn-order {
-      min-height: 32px;
-      padding: 0 0.5rem;
-      font-size: 0.56rem;
-    }
-
-    @media (min-width: 400px) {
-      html.header-compact .nav-trailing .btn-order {
-        min-height: 34px;
-        padding: 0 0.65rem;
-        font-size: 0.6rem;
-      }
-    }
-
-    @media (max-width: 1023px) {
-      html.header-compact .nav-toggle {
-        width: 34px;
-        height: 34px;
-        gap: 3px;
-      }
-
-      html.header-compact .nav-toggle__bar {
-        width: 18px;
-      }
-
-      html.header-compact .site-nav.is-open .nav-toggle__bar:nth-child(1) {
-        transform: translateY(5px) rotate(45deg);
-      }
-
-      html.header-compact .site-nav.is-open .nav-toggle__bar:nth-child(3) {
-        transform: translateY(-5px) rotate(-45deg);
-      }
-
-      html.header-compact .site-nav {
-        padding-block: 0.22rem;
-      }
-
-      html.header-compact .nav-trailing .btn-order {
-        min-height: 28px;
-        padding: 0 0.42rem;
-        font-size: 0.52rem;
-      }
-    }
-
-    @media (max-width: 1023px) and (min-width: 400px) {
-      html.header-compact .nav-trailing .btn-order {
-        min-height: 30px;
-        padding: 0 0.5rem;
-        font-size: 0.55rem;
-      }
-    }
-
-    /* offset for fixed headers */
-    main {
-      padding-top: calc(var(--topbar-h) + var(--nav-h));
-    }
-
-    /* —— Hero —— */
-    .hero-visual {
-      position: relative;
-      min-height: min(78vh, 720px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: clamp(1.5rem, 4vw, 3rem) clamp(0.85rem, 4vw, 1.25rem) 5.5rem;
-      margin-top: calc(-1 * (var(--topbar-h) + var(--nav-h)));
-      padding-top: calc(clamp(1.5rem, 4vw, 3rem) + var(--topbar-h) + var(--nav-h));
-      background:
-        linear-gradient(180deg, rgba(26, 21, 18, 0.45) 0%, rgba(26, 21, 18, 0.75) 100%),
-        url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1920&q=80") center / cover no-repeat;
-      color: #fff;
-      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), 50% 100%, 0 calc(100% - 48px));
-    }
-
-    @media (min-width: 768px) {
-      .hero-visual {
-        min-height: min(88vh, 820px);
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 72px), 50% 100%, 0 calc(100% - 72px));
-        padding-bottom: 6.5rem;
-      }
-    }
-
-    .hero-visual .kicker {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(0.65rem, 2.5vw, 0.72rem);
-      letter-spacing: clamp(0.2em, 2vw, 0.35em);
-      text-transform: uppercase;
-      opacity: 0.9;
-      margin-bottom: 1rem;
-      padding-inline: 0.5rem;
-    }
-
-    .hero-visual h1 {
-      font-family: "Montserrat", system-ui, sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.65rem, 7.5vw, 3.75rem);
-      line-height: 1.15;
-      max-width: min(18ch, 92vw);
-      padding-inline: 0.35rem;
-      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .hero-visual .hero-lead {
-      margin-top: 1.25rem;
-      max-width: 36rem;
-      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-      opacity: 0.92;
-      font-weight: 400;
-    }
-
-    .hero-visual .btn-ghost {
-      margin-top: 2rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 1.75rem;
-      border: 2px solid rgba(255, 255, 255, 0.85);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border-radius: var(--radius);
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .hero-visual .btn-ghost:hover {
-      background: #fff;
-      color: var(--dark);
-    }
-
-    /* —— About strip —— */
-    .about-strip {
-      padding: clamp(1.75rem, 5vw, 2.5rem) 0 1rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: clamp(0.85rem, 2.8vw, 0.92rem);
-      max-width: 40rem;
-      margin: 0 auto;
-      line-height: 1.65;
-    }
-
-    .about-strip strong {
-      color: var(--dark);
-    }
-
-    /* —— Featured —— */
-    .section-featured {
-      padding: 2rem 0 3.5rem;
-    }
-
-    .section-title {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(0.95rem, 3.5vw, 1.35rem);
-      font-weight: 700;
-      letter-spacing: clamp(0.08em, 1.2vw, 0.2em);
-      text-transform: uppercase;
-      text-align: center;
-      color: var(--dark);
-      margin-bottom: 2rem;
-      padding-inline: 0.5rem;
-      line-height: 1.35;
-    }
-
-    .featured-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 640px) and (max-width: 767px) {
-      .featured-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .featured-grid .drink-card:last-child {
-        grid-column: 1 / -1;
-        max-width: min(100%, 420px);
-        margin-inline: auto;
-        width: 100%;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .featured-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .featured-grid .drink-card:last-child {
-        grid-column: auto;
-        max-width: none;
-        margin-inline: 0;
-      }
-    }
-
-    .drink-card {
-      background: var(--cream-card);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(26, 21, 18, 0.08);
-      border: 1px solid rgba(166, 124, 82, 0.15);
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .drink-card__img {
-      aspect-ratio: 1;
-      object-fit: cover;
-      width: 100%;
-    }
-
-    .drink-card__body {
-      padding: 1.35rem 1.25rem 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .drink-card__body h3 {
-      font-family: "Montserrat", system-ui, sans-serif;
-      font-size: clamp(1.05rem, 2.8vw, 1.2rem);
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-      line-height: 1.25;
-    }
-
-    .drink-card__body p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      flex: 1;
-    }
-
-    .btn-dark {
-      margin-top: 1.25rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 1.25rem;
-      background: var(--dark);
-      color: var(--cream);
-      font-family: inherit;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-      align-self: flex-start;
-    }
-
-    .btn-dark:hover {
-      opacity: 0.92;
-    }
-
-    /* —— Promo banners —— */
-    .promo-row {
-      display: grid;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 768px) {
-      .promo-row {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .promo-card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      min-height: clamp(200px, 42vw, 260px);
-      display: flex;
-      align-items: flex-end;
-      padding: clamp(1.1rem, 4vw, 1.75rem);
-      background-size: cover;
-      background-position: center;
-    }
-
-    .promo-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(26, 21, 18, 0.85) 100%);
-    }
-
-    .promo-card__inner {
-      position: relative;
-      z-index: 1;
-      color: #fff;
-    }
-
-    .promo-card__inner h3 {
-      font-family: "Montserrat", system-ui, sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-      margin-bottom: 0.35rem;
-      line-height: 1.2;
-    }
-
-    .promo-card__inner p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-bottom: 1rem;
-    }
-
-    .btn-copper {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 1.35rem;
-      background: var(--copper);
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn-copper:hover {
-      background: var(--copper-hover);
-    }
-
-    /* —— Dark band: deal + visual + newsletter —— */
-    .dark-band {
-      position: relative;
-      padding: clamp(2.5rem, 8vw, 4rem) 0;
-      background:
-        linear-gradient(165deg, rgba(26, 21, 18, 0.92) 0%, rgba(42, 34, 28, 0.95) 100%),
-        url("https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1600&q=80") center / cover fixed;
-      color: var(--cream);
-    }
-
-    @media (max-width: 767px) {
-      .dark-band {
-        background-attachment: scroll;
-      }
-    }
-
-    .dark-band__grid {
-      display: grid;
-      gap: 2rem;
-      align-items: center;
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 992px) {
-      .dark-band__grid {
-        grid-template-columns: 1fr 260px 1fr;
-        gap: 2.5rem;
-      }
-    }
-
-    .cream-card {
-      background: var(--cream-card);
-      color: var(--text);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.25rem, 4vw, 1.75rem) clamp(1.1rem, 3vw, 1.5rem);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-    }
-
-    .cream-card h3 {
-      font-family: "Montserrat", system-ui, sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.2rem, 3.5vw, 1.45rem);
-      margin-bottom: 0.65rem;
-      color: var(--dark);
-      line-height: 1.25;
-    }
-
-    .cream-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-    }
-
-    .cream-card .btn-copper {
-      width: 100%;
-    }
-
-    @media (min-width: 480px) {
-      .cream-card .btn-copper {
-        width: auto;
-      }
-    }
-
-    .dark-band__visual {
-      display: flex;
-      justify-content: center;
-      order: -1;
-    }
-
-    @media (min-width: 992px) {
-      .dark-band__visual {
-        order: 0;
-      }
-    }
-
-    .circle-frame {
-      width: min(240px, 70vw);
-      height: min(240px, 70vw);
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid var(--copper);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-
-    .circle-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .newsletter-form .field {
-      margin-bottom: 0.85rem;
-    }
-
-    .newsletter-form label {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .newsletter-form input {
-      width: 100%;
-      min-height: 44px;
-      padding: 0 0.85rem;
-      border: 1px solid rgba(26, 21, 18, 0.15);
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 16px;
-      background: #fff;
-    }
-
-    @media (min-width: 480px) {
-      .newsletter-form input {
-        font-size: 0.9rem;
-      }
-    }
-
-    /* —— Contact —— */
-    .contact-section {
-      padding: clamp(2.5rem, 8vw, 4rem) 0;
-      background: var(--cream);
-    }
-
-    .contact-section .section-title {
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-section .sub {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: clamp(0.82rem, 2.5vw, 0.9rem);
-      margin-bottom: 2rem;
-      padding-inline: 0.5rem;
-      line-height: 1.5;
-    }
-
-    .contact-wrap {
-      max-width: 36rem;
-      margin: 0 auto;
-      background: var(--cream-card);
-      border: 1px solid rgba(166, 124, 82, 0.2);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.25rem, 4vw, 2rem);
-      box-shadow: 0 8px 32px rgba(26, 21, 18, 0.06);
-    }
-
-    .form-row {
-      margin-bottom: 1.1rem;
-    }
-
-    .contact-wrap label {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .contact-wrap input,
-    .contact-wrap textarea,
-    .contact-wrap select {
-      width: 100%;
-      min-height: 44px;
-      padding: 0.65rem 0.85rem;
-      border: 1px solid rgba(26, 21, 18, 0.12);
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 16px;
-      background: #fff;
-    }
-
-    @media (min-width: 480px) {
-
-      .contact-wrap input,
-      .contact-wrap textarea,
-      .contact-wrap select {
-        font-size: 0.9rem;
-      }
-    }
-
-    .contact-wrap textarea {
-      min-height: 6.5rem;
-      resize: vertical;
-    }
-
-    .contact-wrap input:focus,
-    .contact-wrap textarea:focus,
-    .contact-wrap select:focus {
-      outline: 2px solid var(--copper);
-      outline-offset: 1px;
-    }
-
-    .contact-wrap button[type="submit"] {
-      width: 100%;
-      min-height: 48px;
-      margin-top: 0.25rem;
-      background: var(--dark);
-      color: var(--cream);
-      border: none;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-
-    .contact-wrap button[type="submit"]:hover {
-      opacity: 0.9;
-    }
-
-    /* —— Footer —— */
-    .site-footer {
-      background: var(--dark);
-      color: rgba(242, 233, 225, 0.75);
-      padding: clamp(2rem, 6vw, 3rem) max(1rem, env(safe-area-inset-right)) max(2.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
-      font-size: clamp(0.78rem, 2.2vw, 0.82rem);
-    }
-
-    .footer-grid {
-      display: grid;
-      gap: 2.25rem;
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 640px) {
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 900px) {
-      .footer-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-      }
-    }
-
-    .footer-col h4 {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(0.62rem, 2vw, 0.68rem);
-      font-weight: 700;
-      letter-spacing: clamp(0.1em, 1.2vw, 0.18em);
-      text-transform: uppercase;
-      color: var(--cream);
-      margin-bottom: 1rem;
-    }
-
-    .footer-col p,
-    .footer-col address {
-      line-height: 1.7;
-      font-style: normal;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-col a:hover {
-      color: var(--copper);
-    }
-
-    .social-row {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .social-row a {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(166, 124, 82, 0.5);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    .social-row a:hover {
-      background: var(--copper);
-      border-color: var(--copper);
-      color: #fff;
-    }
-
-    .footer-logo {
-      font-family: "Montserrat", system-ui, sans-serif;
-      font-size: clamp(0.95rem, 2.8vw, 1.25rem);
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      color: var(--cream);
-      line-height: 1.25;
-    }
-
-    .footer-copy {
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-      font-size: 0.72rem;
-      opacity: 0.65;
-    }
-  </style>
+  <title>Cà Phê Tây Nguyên - 48 — Xay nhuyễn đóng bịch</title>
+  <meta name="description"
+    content="Cà phê Robusta Tây Nguyên trứ danh, thu hoạch từ những cánh rừng đỏ bazan dạt dào nắng gió. Không pha tẩm, 100% nguyên chất mộc mạc cho ly phin buổi sáng.">
+  <meta name="keywords" content="cà phê tây nguyên, robusta mộc, cà phê rang xay, buôn ma thuột, cà phê nguyên chất">
+  <meta name="author" content="Cà Phê Tây Nguyên - 48">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://caphetaynguyen48.vn/">
+  <meta property="og:title" content="Cà Phê Tây Nguyên - 48 — Xay nhuyễn đóng bịch">
+  <meta property="og:description"
+    content="Cà phê Robusta Tây Nguyên trứ danh, thu hoạch từ những cánh rừng đỏ bazan dạt dào nắng gió. Không pha tẩm, 100% nguyên chất mộc mạc.">
+  <meta property="og:image" content="https://caphetaynguyen48.vn/assets/images/bag-kraft.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://caphetaynguyen48.vn/">
+  <meta property="twitter:title" content="Cà Phê Tây Nguyên - 48 — Xay nhuyễn đóng bịch">
+  <meta property="twitter:description"
+    content="Cà phê Robusta Tây Nguyên mộc nguyên chất, sảng khoái buổi sáng tinh mơ.">
+  <meta property="twitter:image" content="https://caphetaynguyen48.vn/assets/images/bag-kraft.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-  <div class="top-bar" aria-label="Liên kết phụ">
-    <a href="#lien-he">Giao hàng toàn quốc</a>
-    <span aria-hidden="true">·</span>
-    <a href="tel:">Hotline 032 635 4304</a>
-  </div>
-
-  <nav class="site-nav" id="site-nav" aria-label="Chính">
-    <div class="nav-inner container">
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel"
-        aria-label="Mở menu điều hướng">
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-      </button>
-      <ul class="nav-links nav-links--left nav-links--desktop">
-        <li><a href="#top">Trang chủ</a></li>
-        <li><a href="#gioi-thieu">Giới thiệu</a></li>
-        <li><a href="#san-pham">Sản phẩm</a></li>
-        <li><a href="#san-pham">Cửa hàng</a></li>
-      </ul>
-      <a href="#top" class="logo">
-        <div class="logo-script">Cà Phê Tây Nguyên - 48</div>
-        <div class="logo-sub">xay nhuyễn · đóng bịch</div>
+  <!-- ============================================== -->
+  <!-- HEADER COMPONENT                               -->
+  <!-- ============================================== -->
+  <header class="header" id="header" aria-label="Điều hướng chính">
+    <div class="container header__inner">
+      <a href="#top" class="header__logo">
+        <img src="assets/images/logo.svg" alt="Cà Phê Tây Nguyên - 48" class="header__logo-img">
       </a>
-      <div class="nav-trailing">
-        <a class="btn-order" href="#lien-he">Đặt ngay</a>
+
+      <!-- Desktop Menu -->
+      <ul class="nav">
+        <li><a href="#top" class="nav__link">Trang chủ</a></li>
+        <li><a href="#san-pham" class="nav__link">Sản phẩm</a></li>
+        <li><a href="#quy-trinh" class="nav__link">Quy trình</a></li>
+        <li><a href="#danh-gia" class="nav__link">Đánh giá</a></li>
+      </ul>
+
+      <!-- Desktop Actions -->
+      <div class="header__actions">
+        <a class="btn btn--primary" href="#san-pham">Mua ngay</a>
       </div>
-      <div class="nav-actions">
-        <ul class="nav-links nav-links--right nav-links--desktop">
-          <li><a href="#lien-he">Liên hệ</a></li>
-        </ul>
-        <a class="btn-order" href="#lien-he">Đặt ngay</a>
-      </div>
+
+      <!-- Mobile Toggle -->
+      <button type="button" class="header__toggle" id="header-toggle" aria-expanded="false" aria-controls="header-panel"
+        aria-label="Mở menu">
+        <span class="header__toggle-bar" aria-hidden="true"></span>
+        <span class="header__toggle-bar" aria-hidden="true"></span>
+        <span class="header__toggle-bar" aria-hidden="true"></span>
+      </button>
     </div>
-    <div id="nav-panel" class="nav-panel" role="dialog" aria-modal="true" aria-label="Menu chính" aria-hidden="true">
-      <ul class="nav-panel__links">
-        <li><a href="#top">Trang chủ</a></li>
-        <li><a href="#gioi-thieu">Giới thiệu</a></li>
-        <li><a href="#san-pham">Sản phẩm</a></li>
-        <li><a href="#san-pham">Cửa hàng</a></li>
-        <li><a href="#lien-he">Liên hệ</a></li>
+
+    <!-- Mobile Panel -->
+    <div id="header-panel" class="header-panel">
+      <ul class="header-panel__list">
+        <li><a href="#top" class="header-panel__link">Trang chủ</a></li>
+        <li><a href="#san-pham" class="header-panel__link">Sản phẩm</a></li>
+        <li><a href="#quy-trinh" class="header-panel__link">Quy trình</a></li>
+        <li><a href="#danh-gia" class="header-panel__link">Đánh giá</a></li>
       </ul>
     </div>
-    <div id="nav-scrim" class="nav-scrim" aria-hidden="true"></div>
-  </nav>
+    <div id="header-scrim" class="header-scrim" aria-hidden="true"
+      style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:998;"></div>
+  </header>
 
-  <main>
-    <section id="top" class="hero-visual" aria-labelledby="hero-heading">
-      <p class="kicker">Cà Phê Tây Nguyên - 48</p>
-      <h1 id="hero-heading">Arabica &amp; Robusta<br>xay nhuyễn, đóng bịch</h1>
-      <p class="hero-lead">Hạt chọn lọc, rang nhỏ lô, xay mịn đúng độ — đóng bịch kín hơi để bạn pha phin, pha máy hay
-        filter tiện lợi mỗi ngày.</p>
-      <a class="btn-ghost" href="#san-pham">Xem bịch cà phê</a>
-    </section>
+  <!-- ============================================== -->
+  <!-- HERO SECTION                                   -->
+  <!-- ============================================== -->
+  <main class="main-content">
 
-    <div class="container">
-      <p id="gioi-thieu" class="about-strip"><strong>Cà Phê Tây Nguyên - 48</strong> chuyên <strong>cà phê bột xay
-          nhuyễn đóng
-          bịch</strong>,
-        hai dòng hạt <strong>Arabica</strong> (thơm, hậu ngọt) và <strong>Robusta</strong> (đậm, ít chua), cùng blend
-        cân bằng.
-        Bạn chọn mức rang và độ xay; bịch có dung tích phổ biến 250g / 500g — giao tận nơi, hướng dẫn pha phù hợp.</p>
-
-      <section id="san-pham" class="section-featured" aria-labelledby="feat-heading">
-        <h2 id="feat-heading" class="section-title">Bịch xay nhuyễn</h2>
-        <div class="featured-grid">
-          <article class="drink-card">
-            <img class="drink-card__img"
-              src="https://images.unsplash.com/photo-1605711599412-775918dbe770?auto=format&fit=crop&w=800&q=80"
-              width="800" height="800" alt="Bịch cà phê Arabica xay nhuyễn trên gỗ">
-            <div class="drink-card__body">
-              <h3>Arabica xay nhuyễn</h3>
-              <p>Bột mịn từ hạt Arabica — hương thơm rõ, hậu ngọt nhẹ, ít đắng gắt. Hợp pha phin, V60, máy espresso gia
-                đình.</p>
-              <a class="btn-dark" href="#lien-he">Đặt mua</a>
-            </div>
-          </article>
-          <article class="drink-card">
-            <img class="drink-card__img"
-              src="https://images.unsplash.com/photo-1544486864-3087e2e20d91?auto=format&fit=crop&w=800&q=80"
-              width="800" height="800" alt="Bịch đóng cà phê Robusta xay nhuyễn">
-            <div class="drink-card__body">
-              <h3>Robusta xay nhuyễn</h3>
-              <p>Đậm vị, crema cao khi pha phin — gu truyền thống Việt Nam. Xay đúng cỡ cho phin nhôm / máy.</p>
-              <a class="btn-dark" href="#lien-he">Đặt mua</a>
-            </div>
-          </article>
-          <article class="drink-card">
-            <img class="drink-card__img"
-              src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80"
-              width="800" height="800" alt="Blend Arabica và Robusta">
-            <div class="drink-card__body">
-              <h3>Blend Arabica + Robusta</h3>
-              <p>Pha trộn tỉ lệ cân bằng — vừa thơm vừa đậm, ít chua. Một bịch cho cả nhà uống phin sáng.</p>
-              <a class="btn-dark" href="#lien-he">Đặt mua</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="promo-row">
-          <div class="promo-card"
-            style="background-image: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80')">
-            <div class="promo-card__inner">
-              <h3>Combo 3 bịch</h3>
-              <p>Mua 3 bịch xay nhuyễn (cùng hoặc khác dòng) — ưu đãi theo tháng. Ghi rõ khối lượng khi đặt.</p>
-              <a class="btn-copper" href="#lien-he">Nhận ưu đãi</a>
-            </div>
-          </div>
-          <div class="promo-card"
-            style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80')">
-            <div class="promo-card__inner">
-              <h3>Set quà 2 bịch</h3>
-              <p>1 bịch Arabica + 1 bịch Robusta (hoặc 2 blend), kèm hướng dẫn pha — gói quà tặng gọn nhẹ.</p>
-              <a class="btn-copper" href="#lien-he">Mua ngay</a>
-            </div>
+    <section id="top" class="hero">
+      <div class="container hero__grid">
+        <!-- Hero Text -->
+        <div class="hero__content fade-up" style="transition-delay: 0.1s">
+          <p class="hero__kicker">Nông sản sạch Đắk Nông</p>
+          <h1 class="hero__title">Mỗi ly cà phê,<br>phép màu<span><br>bản địa.</span></h1>
+          <p class="hero__desc">
+            Cà phê Robusta Tây Nguyên trứ danh, thu hoạch từ những cánh rừng đỏ bazan dạt dào nắng gió. Không pha tẩm,
+            100% nguyên chất mộc mạc cho ly phin buổi sáng vẹn nguyên hương vị mạnh mẽ tinh tế.
+          </p>
+          <div class="hero__action">
+            <a class="btn btn--primary" href="#san-pham">Mua ngay</a>
           </div>
         </div>
-      </section>
-    </div>
 
-    <section class="dark-band" id="uudai" aria-labelledby="deal-heading">
-      <div class="container dark-band__grid">
-        <div class="cream-card">
-          <h3 id="deal-heading">Ưu đãi trong ngày</h3>
-          <p>Đặt trước 10h — freeship nội thành cho đơn từ 300k. Combo 1 bịch Arabica + 1 bịch Robusta giảm thêm theo
-            chương trình tháng.</p>
-          <a class="btn-copper" href="#lien-he">Áp dụng ngay</a>
-        </div>
-        <div class="dark-band__visual" id="cau-chuyen">
-          <div class="circle-frame">
-            <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?auto=format&fit=crop&w=600&q=80"
-              width="600" height="600" alt="Pha cà phê từ bịch xay nhuyễn">
-          </div>
-        </div>
-        <div class="cream-card">
-          <h3>Bản tin Tây Nguyên - 48</h3>
-          <p>Nhận mẹo pha bịch xay, mẻ rang mới và mã giảm giá — không spam.</p>
-          <form class="newsletter-form" action="https://formspree.io/f/xeepgovq" method="POST">
-            <input type="hidden" name="_subject" value="[Cà Phê Tây Nguyên - 48] Đăng ký bản tin">
-            <div class="field">
-              <label for="nl-email">Email</label>
-              <input type="email" id="nl-email" name="email" required autocomplete="email" placeholder="ban@email.com">
-            </div>
-            <button type="submit" class="btn-copper" style="width:100%">Đăng ký</button>
-          </form>
+        <!-- Hero Visual (Floating 3D) -->
+        <div class="hero__visual fade-up" style="transition-delay: 0.3s">
+          <div class="hero__bg-pattern"></div>
+          <div class="hero__sunburst"></div>
+
+          <img src="assets/images/bag-kraft.jpg" alt="Bịch cà phê Tây Nguyên" class="hero__product-img">
+
+          <!-- Decorative Floating Beans -->
+          <img src="assets/images/float-beans.jpg" class="hero__floating-item float-1" style="border-radius: 50%;">
+          <img src="assets/images/bag-kraft.jpg" class="hero__floating-item float-2"
+            style="border-radius: 50%; opacity: 0.8; height: 90px; width: 90px; object-fit: cover;">
         </div>
       </div>
     </section>
 
-    <section id="lien-he" class="contact-section" aria-labelledby="contact-heading">
+    <!-- ============================================== -->
+    <!-- STATS ROW                                      -->
+    <!-- ============================================== -->
+    <section class="stats fade-up">
+      <div class="container stats__grid">
+        <!-- Stat 1 -->
+        <div class="stat-block fade-up" style="transition-delay: 0.1s">
+          <svg class="stat-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <div class="stat-block__label">Vùng trồng</div>
+          <div class="stat-block__value">Buôn Ma Thuột</div>
+        </div>
+        <!-- Stat 2 -->
+        <div class="stat-block fade-up" style="transition-delay: 0.2s">
+          <svg class="stat-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3l4 8 5-5 5 15H2L8 3z"></path>
+          </svg>
+          <div class="stat-block__label">Độ cao</div>
+          <div class="stat-block__value">800-1000m</div>
+        </div>
+        <!-- Stat 3 -->
+        <div class="stat-block fade-up" style="transition-delay: 0.3s">
+          <svg class="stat-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z">
+            </path>
+          </svg>
+          <div class="stat-block__label">Độ rang</div>
+          <div class="stat-block__value">Dark Roast</div>
+        </div>
+        <!-- Stat 4 -->
+        <div class="stat-block fade-up" style="transition-delay: 0.4s">
+          <svg class="stat-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <div class="stat-block__label">Sơ chế</div>
+          <div class="stat-block__value">Natural</div>
+        </div>
+        <!-- Stat 5 -->
+        <div class="stat-block fade-up" style="transition-delay: 0.5s">
+          <svg class="stat-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <div class="stat-block__label">Quy cách</div>
+          <div class="stat-block__value">Bịch 500g</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ABOUT US SECTION                               -->
+    <!-- ============================================== -->
+    <section id="gioi-thieu" class="about">
+      <div class="container about__grid">
+        <!-- Organic Collage Left -->
+        <div class="collage fade-up" style="transition-delay: 0.1s">
+          <!-- Tay Nguyen specific images AI replaced (.png files mapped here!) -->
+          <img src="assets/images/farm-cherry.png" alt="Cây cà phê đỏ" class="collage__img collage__img--1">
+          <img src="assets/images/roast-beans.jpg" alt="Hạt cà phê nguyên chất" class="collage__img collage__img--2">
+          <img src="assets/images/phin-drip.png" alt="Pha phin truyền thống" class="collage__img collage__img--3">
+        </div>
+
+        <!-- About Text Right -->
+        <div class="about__content fade-up" style="transition-delay: 0.3s">
+          <h2 class="section-title">
+            Về chúng tôi
+          </h2>
+          <p class="about__desc">
+            Với tình yêu mãnh liệt dành cho vùng đất đỏ bazan, thương hiệu Cà Phê Tây Nguyên - 48 ra đời mang theo bản
+            sắc mạnh mẽ của núi rừng. Chúng tôi tự hào giới thiệu đến bạn thức uống nguyên bản nhất của người Việt.
+          </p>
+          <p class="about__desc">
+            Mọi túi cà phê đều trải qua quá trình hái lựu thả tay 100% quả chín, phơi nắng tự nhiên trên giàn giáo để
+            giữ lại hậu vị ngọt sâu. Xay nhuyễn chuẩn xác kích thước hạt, đóng gói khóa Zip cẩn thận chờ bạn thưởng thức
+            mỗi sáng.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- PROCESS SECTION (HOW WE DO)                    -->
+    <!-- ============================================== -->
+    <section id="quy-trinh" class="process">
+      <div class="container process__grid">
+        <!-- Text Left -->
+        <div class="process__content fade-up" style="transition-delay: 0.1s">
+          <h2 class="section-title">
+            Quy trình của chúng tôi
+          </h2>
+          <p>Từ năm 2020, giấc mơ bảo vệ và nâng tầm hạt cà phê đặc sản Việt đã thành hiện thực. Chúng tôi liên kết chặt
+            chẽ với những hộ nông dân địa phương, canh tác tự nhiên không lạm dụng hóa chất.</p>
+          <br>
+          <p>Thu hoạch bằng tay toàn bộ quả chín đỏ. Quá trình kiểm soát nhiệt nghiêm ngặt trong hệ thống máy rang công
+            nghệ hot-air giúp hạt dậy mùi thơm tối đa, crema siêu dày mà không hề cháy khét.</p>
+          <br>
+          <p>Chỉ cần 5 phút chuẩn bị với một chiếc phin nhôm truyền thống, bạn đã có thể lan tỏa mùi hương xao xuyến
+            khắp phòng.</p>
+          <br><br>
+          <a class="btn btn--primary" href="#san-pham">Mua ngay</a>
+        </div>
+
+        <!-- Image Boxed Frame Right -->
+        <div class="process__visual-frame fade-up" style="transition-delay: 0.3s">
+          <div class="process__badge">CÀ PHÊ MỘC</div>
+          <img src="assets/images/process-main.jpg" alt="Góc nông trại cà phê Tây Nguyên" class="process__img"
+            style="aspect-ratio: 4/3;">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- PRODUCTS SECTION                               -->
+    <!-- ============================================== -->
+    <section id="san-pham" class="products">
       <div class="container">
-        <h2 id="contact-heading" class="section-title">Liên hệ đặt hàng</h2>
-        <p class="sub">Gửi form — tin nhắn sẽ tới email bạn đã cấu hình trên Formspree.</p>
-        <div class="contact-wrap">
-          <form action="https://formspree.io/f/xeepgovq" method="POST">
-            <input type="hidden" name="_subject" value="[Cà Phê Tây Nguyên - 48] Liên hệ đặt hàng">
-            <div class="form-row">
-              <label for="name">Họ và tên</label>
-              <input type="text" id="name" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+
+        <div class="section-header fade-up" style="max-width: 700px; margin: 0 auto 3rem; text-align: center;">
+          <h2 class="section-title" style="justify-content: center;">Sản phẩm của chúng tôi</h2>
+          <p>Hạt cà phê chất lượng nhất từ cao nguyên nắng gió, sẵn sàng cho ly phin của bạn.</p>
+        </div>
+
+        <div class="products__grid">
+          <!-- Sidebar Filters -->
+          <aside class="sidebar fade-up" style="transition-delay: 0.1s">
+            <h4
+              style="margin-bottom: 2rem; font-family: var(--font-main); color: var(--color-text-main); font-size: 1.25rem;">
+              Nổi Bật</h4>
+            <ul class="sidebar__list">
+              <li><a href="#" class="sidebar__link sidebar__link--active">Robusta Đặc Sản</a></li>
+              <li><a href="#" class="sidebar__link">Arabica Cầu Đất</a></li>
+              <li><a href="#" class="sidebar__link">Blend (Tỷ lệ Vàng)</a></li>
+              <li><a href="#" class="sidebar__link">Phin Nhôm</a></li>
+              <li><a href="#" class="sidebar__link">Theo Kg (Sỉ)</a></li>
+              <li><a href="#" class="sidebar__link">Xem Tất Cả</a></li>
+            </ul>
+          </aside>
+
+          <!-- Product Carousel Area -->
+          <div class="product-carousel fade-up" style="transition-delay: 0.3s">
+            <button class="carousel-btn" aria-label="Previous">&larr;</button>
+
+            <div class="product-cards">
+              <!-- Item 1 -->
+              <article class="product-card" style="background-color: #fcebdc;">
+                <span class="product-card__badge" style="background:var(--color-primary)">100%</span>
+                <img src="assets/images/product-robusta.png" alt="Robusta Đậm Vị" class="product-card__img">
+                <h3 class="product-card__name">Robusta Đậm Vị</h3>
+                <p class="product-card__desc">Xay nhuyễn, Đắng đậm, Crema Dày</p>
+                <a class="btn btn--primary" href="#lien-he"
+                  style="min-height:40px; padding: 0 1.25rem; font-size: 0.95rem;">Mua ngay</a>
+              </article>
+
+              <!-- Item 2 -->
+              <article class="product-card" style="background-color: #e5d8d0;">
+                <span class="product-card__badge" style="background:var(--color-text-main)">Sale</span>
+                <img src="assets/images/product-blend.png" alt="Blend Tỷ Lệ Vàng" class="product-card__img">
+                <h3 class="product-card__name">Blend Tỷ Lệ Vàng</h3>
+                <p class="product-card__desc">80% Robusta : 20% Arabica</p>
+                <a class="btn btn--primary"
+                  style="background-color: #4A3022; min-height:40px; padding: 0 1.25rem; font-size: 0.95rem;"
+                  href="#lien-he">Mua ngay</a>
+              </article>
+
+              <!-- Item 3 -->
+              <article class="product-card" style="background-color: #d1dadc;">
+                <span class="product-card__badge" style="background:#5C7F92">New</span>
+                <img src="assets/images/product-arabica.png" alt="Arabica Mộc" class="product-card__img">
+                <h3 class="product-card__name">Arabica Mộc</h3>
+                <p class="product-card__desc">Hương Trái Cây, Hậu Ngọt Thanh</p>
+                <a class="btn btn--primary"
+                  style="background-color: #5C7F92; min-height:40px; padding: 0 1.25rem; font-size: 0.95rem;"
+                  href="#lien-he">Mua ngay</a>
+              </article>
             </div>
-            <div class="form-row">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required autocomplete="email" placeholder="ban@email.com">
-            </div>
-            <div class="form-row">
-              <label for="phone">Điện thoại</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="09xx xxx xxx">
-            </div>
-            <div class="form-row">
-              <label for="product">Sản phẩm quan tâm</label>
-              <select id="product" name="product">
-                <option value="">— Chọn —</option>
-                <option value="arabica-xay">Arabica xay nhuyễn (bịch)</option>
-                <option value="robusta-xay">Robusta xay nhuyễn (bịch)</option>
-                <option value="blend">Blend Arabica + Robusta (bịch)</option>
-                <option value="khac">Khác / tư vấn độ xay</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <label for="message">Nội dung</label>
-              <textarea id="message" name="message"
-                placeholder="Số bịch, khối lượng (250g / 500g), địa chỉ giao hàng, ghi chú…"></textarea>
-            </div>
-            <button type="submit">Gửi yêu cầu</button>
+
+            <button class="carousel-btn" aria-label="Next">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- TESTIMONIALS SECTION                           -->
+    <!-- ============================================== -->
+    <section id="danh-gia" class="testimonials">
+      <div class="container">
+
+        <div class="section-header fade-up" style="max-width: 700px; margin: 0 auto 3rem; text-align: center;">
+          <h2 class="section-title" style="justify-content: center;">Khách hàng tin tưởng chúng tôi</h2>
+          <p style="max-width: 500px; margin: 0 auto; color: var(--color-text-muted);">Hàng ngàn dân ghiền cà phê sáng
+            đã chuyển sang dùng mộc nguyên chất để bảo vệ sức khỏe và thưởng thức đúng điệu.</p>
+        </div>
+
+        <div class="testi-cards">
+          <div class="testi-card fade-up" style="transition-delay: 0.1s">
+            <div class="testi-card__stars">★★★★★</div>
+            <p class="testi-card__text">"Mua về pha phin ngay tại công ty, đồng nghiệp ngửi mùi là chạy sang hỏi xin
+              link. Mùi vị rất tự nhiên, đậm đúng gu người Việt. Mình đánh giá 10/10."</p>
+            <h4 class="testi-card__author">Trí Nguyễn<br><span
+                style="font-size: 0.8em; font-weight: normal; color:var(--color-text-muted)">Khách sỉ tại HCM</span>
+            </h4>
+          </div>
+          <div class="testi-card fade-up" style="transition-delay: 0.2s">
+            <div class="testi-card__stars">★★★★★</div>
+            <p class="testi-card__text">"Dòng Blend 80/20 xay nhuyễn rất mịn, về pha máy rớt lớp crema vàng ươm rất dầy.
+              Giá cả cho 1 bịch 500g quá hời so với chất lượng cà đặc sản."</p>
+            <h4 class="testi-card__author">Chị Ngọc Lâm<br><span
+                style="font-size: 0.8em; font-weight: normal; color:var(--color-text-muted)">Chủ Barista Shop</span>
+            </h4>
+          </div>
+          <div class="testi-card fade-up" style="transition-delay: 0.3s">
+            <div class="testi-card__stars">★★★★☆</div>
+            <p class="testi-card__text">"Túi đựng thiết kế siêu mộc mạc và đẹp mắt. Mở zip ra thơm nức mũi. Mình mang đi
+              biếu bạn bè ai cũng khen. Xin lỗi vì chỉ được phép đánh giá tối đa 5 sao!"</p>
+            <h4 class="testi-card__author">Minh Phương<br><span
+                style="font-size: 0.8em; font-weight: normal; color:var(--color-text-muted)">Khách lẻ Hà Nội</span></h4>
+          </div>
+        </div>
+
+        <!-- Dots indicator per matched image UI -->
+        <div class="testi-dots fade-up" style="transition-delay: 0.4s">
+          <div class="testi-dot active"></div>
+          <div class="testi-dot" style="background-color: var(--color-text-main); height: 12px; width: 12px;"></div>
+          <div class="testi-dot"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- NEWSLETTER (SIGN UP) SECTION                   -->
+    <!-- ============================================== -->
+    <section class="newsletter">
+      <div class="container">
+        <div class="newsletter__box fade-up">
+          <h2 class="section-title" style="justify-content: center; text-align: center;">Đăng ký nhận ưu đãi sớm</h2>
+          <p style="color: var(--color-text-muted);">Để lại email để không bỏ lỡ voucher và lô cà phê mộc rang mới nhất
+            (thứ 2 hàng tuần).</p>
+          <form class="newsletter__form" action="https://formspree.io/f/xeepgovq" method="POST">
+            <input type="email" name="email" class="newsletter__input" placeholder="Your Email" required>
+            <button type="submit" class="btn btn--primary">Get Started</button>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-col">
-        <div class="footer-logo">Cà Phê Tây Nguyên - 48</div>
-        <div class="social-row" aria-label="Mạng xã hội">
-          <a href="https://www.facebook.com/profile.php?id=61575467911052" aria-label="Facebook">FB</a>
-          <a href="https://www.instagram.com/cafe.taynguyen48/" aria-label="Instagram">IG</a>
-        </div>
+  <!-- ============================================== -->
+  <!-- FOOTER                                         -->
+  <!-- ============================================== -->
+  <footer class="footer fade-up">
+    <div class="container footer__grid">
+      <!-- Left Logo -->
+      <div class="footer__logo-wrap">
+        <img src="assets/images/logo.svg" alt="Cà Phê Tây Nguyên" class="footer__logo">
       </div>
-      <div class="footer-col">
-        <h4>Sản phẩm</h4>
-        <ul>
-          <li><a href="#san-pham">Arabica xay nhuyễn</a></li>
-          <li><a href="#san-pham">Robusta xay nhuyễn</a></li>
-          <li><a href="#san-pham">Blend bịch</a></li>
-          <li><a href="#uudai">Ưu đãi</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Liên hệ</h4>
-        <p>Điện thoại: 032 635 4304<br>Email: ntngochai2210@gmail.com</p>
-      </div>
-      <div class="footer-col">
-        <h4>Thương hiệu</h4>
-        <p>Gu không vội — hương không thỏa hiệp.<br>© <span id="y"></span> Cà Phê Tây Nguyên - 48.</p>
+
+      <!-- Center Links -->
+      <ul class="footer__nav">
+        <li><a href="#san-pham">Sản phẩm</a></li>
+        <li><a href="#quy-trinh">Quy trình</a></li>
+        <li><a href="#danh-gia">Đánh giá</a></li>
+        <li><a href="#gioi-thieu">Về chúng tôi</a></li>
+      </ul>
+
+      <!-- Right Socials -->
+      <div class="footer__social">
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99h-2.54V12h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99C18.34 21.12 22 16.99 22 12c0-5.52-4.48-10-10-10z" />
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.4 5.6 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.6 18.4 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+          </svg>
+        </a>
       </div>
     </div>
-    <p class="footer-copy container">Cà Phê Tây Nguyên - 48 © <span id="y2"></span></p>
+
+    <!-- Bottom Absolute Bar -->
+    <div class="footer__bottom">
+      &copy; <span id="y">2026</span> Cà Phê Tây Nguyên - 48. All rights reserved.
+    </div>
   </footer>
 
-  <script>
-    (function () {
-      var y = String(new Date().getFullYear());
-      var elY = document.getElementById("y");
-      var elY2 = document.getElementById("y2");
-      if (elY) elY.textContent = y;
-      if (elY2) elY2.textContent = y;
-    })();
-    (function () {
-      var nav = document.getElementById("site-nav");
-      var toggle = document.getElementById("nav-toggle");
-      var panel = document.getElementById("nav-panel");
-      var scrim = document.getElementById("nav-scrim");
-      if (!nav || !toggle || !panel || !scrim) return;
-
-      function setOpen(open) {
-        nav.classList.toggle("is-open", open);
-        panel.classList.toggle("is-open", open);
-        scrim.classList.toggle("is-open", open);
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
-        panel.setAttribute("aria-hidden", open ? "false" : "true");
-        scrim.setAttribute("aria-hidden", open ? "false" : "true");
-        document.body.classList.toggle("nav-locked", open);
-        toggle.setAttribute("aria-label", open ? "Đóng menu điều hướng" : "Mở menu điều hướng");
-      }
-
-      toggle.addEventListener("click", function () {
-        setOpen(!nav.classList.contains("is-open"));
-      });
-      scrim.addEventListener("click", function () {
-        setOpen(false);
-      });
-      panel.querySelectorAll("a").forEach(function (a) {
-        a.addEventListener("click", function () {
-          setOpen(false);
-        });
-      });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") setOpen(false);
-      });
-    })();
-    (function () {
-      var root = document.documentElement;
-      var threshold = 40;
-      var compact = false;
-
-      function sync() {
-        var y = window.scrollY || root.scrollTop;
-        var next = y > threshold;
-        if (next === compact) return;
-        compact = next;
-        root.classList.toggle("header-compact", next);
-      }
-
-      var scheduled = false;
-      function onScroll() {
-        if (scheduled) return;
-        scheduled = true;
-        requestAnimationFrame(function () {
-          scheduled = false;
-          sync();
-        });
-      }
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-      sync();
-    })();
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
