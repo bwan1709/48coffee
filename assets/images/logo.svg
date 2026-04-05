@@ -3,13 +3,13 @@
  <!-- Circular Coffee Bean Mark -->
  <!-- Brand Text -->
  <g class="layer">
-  <title>Layer 1</title>
+  <title>Ba Hải Cà Phê</title>
   <g id="svg_1" transform="translate(10, 5) scale(0.6)">
    <circle cx="40" cy="40" fill="#4A3022" id="svg_2" r="40"/>
    <path d="m40,20c15,0 20,15 20,20c0,15 -15,20 -20,20c-15,0 -20,-15 -20,-20c0,-15 15,-20 20,-20z" fill="#C98A6C" id="svg_3"/>
    <path d="m35,25c10,10 0,20 10,30" fill="none" id="svg_4" stroke="#4A3022" stroke-linecap="round" stroke-width="4"/>
   </g>
-  <text fill="#4A3022" font-family="&#x27;1FTV VIP Pastel Trunk&#x27;, &#x27;Outfit&#x27;, sans-serif" font-size="28" font-weight="700" id="svg_5" letter-spacing="1" text-anchor="start" x="80" y="32">CÀ PHÊ TÂY NGUYÊN</text>
+  <text fill="#4A3022" font-family="&#x27;1FTV VIP Pastel Trunk&#x27;, &#x27;Outfit&#x27;, sans-serif" font-size="28" font-weight="700" id="svg_5" letter-spacing="1" text-anchor="start" x="80" y="32">BA HẢI CÀ PHÊ</text>
   <text fill="#8C7A70" font-family="&#x27;Inter&#x27;, sans-serif" font-size="11" font-weight="500" id="svg_7" letter-spacing="3" text-anchor="start" x="82" y="52">XAY NHUYỄN · ĐÓNG BỊCH</text>
  </g>
 </svg>

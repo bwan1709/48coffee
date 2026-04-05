@@ -1,5 +1,5 @@
 /**
- * Cà Phê Tây Nguyên - 48
+ * Ba Hải Cà Phê
  * Main Script
  */
 
@@ -76,11 +76,64 @@
     });
   }
 
+  function initProductTabs() {
+    var wrap = document.querySelector(".products__tabs-wrap");
+    if (!wrap) return;
+
+    var tabs = wrap.querySelectorAll('.products__tab[role="tab"]');
+    var panels = wrap.querySelectorAll('.products__panel[role="tabpanel"]');
+    if (!tabs.length || !panels.length) return;
+
+    function activateTab(selected) {
+      tabs.forEach(function (tab) {
+        var on = tab === selected;
+        tab.classList.toggle("is-active", on);
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.setAttribute("tabindex", on ? "0" : "-1");
+      });
+      panels.forEach(function (panel) {
+        var id = selected.getAttribute("aria-controls");
+        var show = panel.id === id;
+        panel.classList.toggle("is-active", show);
+        if (show) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activateTab(tab);
+      });
+      tab.addEventListener("keydown", function (e) {
+        var i = Array.prototype.indexOf.call(tabs, tab);
+        var next = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+          e.preventDefault();
+          next = tabs[(i + 1) % tabs.length];
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          e.preventDefault();
+          next = tabs[(i - 1 + tabs.length) % tabs.length];
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          next = tabs[0];
+        } else if (e.key === "End") {
+          e.preventDefault();
+          next = tabs[tabs.length - 1];
+        }
+        if (next) {
+          next.focus();
+          activateTab(next);
+        }
+      });
+    });
+  }
+
   // Khởi tạo các module
   document.addEventListener("DOMContentLoaded", function () {
     updateYear();
     initMobileMenu();
     initScrollAnimations();
+    initProductTabs();
   });
 
 })();

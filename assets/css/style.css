@@ -1,5 +1,5 @@
 /* =========================================================================
-   VARIABLES & BASE (1:1 UI Clone & Tây Nguyên Vibe)
+   VARIABLES & BASE — Ba Hải Cà Phê
    ========================================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
 
@@ -635,44 +635,105 @@ a {
   display: none; /* No icon on this title in image */
 }
 
-.products__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+.products__tabs-wrap {
+  width: 100%;
+  max-width: 100%;
 }
 
-@media (min-width: 1024px) {
-  .products__grid {
-    grid-template-columns: 200px 1fr;
-    align-items: start;
-    gap: 2rem;
-  }
-}
-
-.sidebar__list {
-  list-style: none;
+.products__tabs {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0 0.25rem 0.35rem;
+  border-bottom: 1px solid var(--color-secondary);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-@media (min-width: 1024px) {
-  .sidebar__list { flex-direction: column; gap: 1.5rem; }
+.products__tabs::-webkit-scrollbar {
+  display: none;
 }
 
-.sidebar__link {
+.products__tab {
   font-family: var(--font-main);
-  font-size: 1.15rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-text-muted);
-  padding-bottom: 0.25rem;
+  background: transparent;
+  border: none;
   border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  padding: 0.45rem 0.2rem 0.65rem;
+  border-radius: 0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.sidebar__link--active, .sidebar__link:hover {
+@media (min-width: 640px) {
+  .products__tabs { gap: 0 2rem; }
+  .products__tab { font-size: 1.02rem; padding: 0.5rem 0.35rem 0.7rem; }
+}
+
+.products__tab:hover {
   color: var(--color-text-main);
-  border-color: var(--color-primary);
+}
+
+.products__tab.is-active,
+.products__tab[aria-selected="true"] {
+  color: var(--color-text-main);
+  border-bottom-color: var(--color-primary);
+}
+
+.products__tab:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.products__panel[hidden] {
+  display: none !important;
+}
+
+.products__panel.is-active {
+  display: block;
+}
+
+.product-carousel--tabs {
+  display: block;
+  width: 100%;
+}
+
+.product-cards--tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 0.5rem 0 1rem;
+  overflow-x: visible;
+  justify-items: center;
+}
+
+.product-cards--tabs .product-card {
+  width: 100%;
+  max-width: 340px;
+}
+
+.product-cards--blend {
+  grid-template-columns: 1fr;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-card__img--svg {
+  object-fit: contain;
+  height: 180px;
+  width: auto;
+  max-width: 200px;
 }
 
 .product-carousel {
@@ -1003,23 +1064,31 @@ a {
   
   /* Products */
   .products { padding: 3rem 0; margin-top: 1rem; }
-  .sidebar__list { 
-    justify-content: center; 
-    gap: 0.75rem; 
-    margin-bottom: 2rem; 
-    flex-wrap: wrap; /* CRITICAL: Prevents layout breaking */ 
+  .products__tabs {
+    justify-content: flex-start;
+    gap: 0 1.15rem;
+    padding-left: 0;
+    padding-right: 0;
   }
-  .sidebar__link { font-size: 0.95rem; padding: 0.25rem 0.5rem; white-space: nowrap; }
-  
+  .products__tab {
+    font-size: 0.85rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+  }
+
   .product-carousel { display: block; width: 100%; overflow: hidden; }
   .carousel-btn { display: none; }
   
   .product-cards { 
     display: grid; 
-    grid-template-columns: 1fr; /* Single column stacking on mobile */
+    grid-template-columns: 1fr;
     gap: 1.5rem; 
     padding: 0; 
     overflow-x: visible;
+  }
+
+  .product-cards--tabs {
+    grid-template-columns: 1fr;
   }
   
   .product-card { 
