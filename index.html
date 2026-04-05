@@ -374,17 +374,49 @@
     </section>
 
     <!-- ============================================== -->
-    <!-- NEWSLETTER (SIGN UP) SECTION                   -->
+    <!-- LIÊN HỆ                                       -->
     <!-- ============================================== -->
     <section class="newsletter" id="lien-he">
       <div class="container">
         <div class="newsletter__box fade-up">
-          <h2 class="section-title" style="justify-content: center; text-align: center;">Đăng ký nhận ưu đãi sớm</h2>
-          <p style="color: var(--color-text-muted);">Để lại email để không bỏ lỡ voucher và lô cà phê mộc rang mới nhất
-            (thứ 2 hàng tuần).</p>
-          <form class="newsletter__form" action="https://formspree.io/f/xeepgovq" method="POST">
-            <input type="email" name="email" class="newsletter__input" placeholder="Your Email" required>
-            <button type="submit" class="btn btn--primary">Get Started</button>
+          <h2 class="section-title" style="justify-content: center; text-align: center;">Liên hệ đặt hàng</h2>
+          <p style="color: var(--color-text-muted); max-width: 36rem; margin-inline: auto;">Gửi form bên dưới — tin nhắn
+            sẽ tới email bạn đã cấu hình trên Formspree.</p>
+          <form class="contact-form" action="https://formspree.io/f/xeepgovq" method="POST">
+            <input type="hidden" name="_subject" value="[Ba Hải Cà Phê] Liên hệ đặt hàng">
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="contact-name">Họ và tên</label>
+              <input class="contact-form__input" type="text" id="contact-name" name="name" required autocomplete="name"
+                placeholder="Nguyễn Văn A">
+            </div>
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="contact-email">Email</label>
+              <input class="contact-form__input" type="email" id="contact-email" name="email" required
+                autocomplete="email" placeholder="ban@email.com">
+            </div>
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="contact-phone">Điện thoại</label>
+              <input class="contact-form__input" type="tel" id="contact-phone" name="phone" autocomplete="tel"
+                placeholder="09xx xxx xxx">
+            </div>
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="contact-product">Sản phẩm quan tâm</label>
+              <select class="contact-form__input" id="contact-product" name="product">
+                <option value="">— Chọn —</option>
+                <option value="hat-robusta">Hạt rang Robusta</option>
+                <option value="hat-arabica">Hạt rang Arabica</option>
+                <option value="xay-robusta">Xay nhuyễn Robusta</option>
+                <option value="xay-arabica">Xay nhuyễn Arabica</option>
+                <option value="blend">Blend tỉ lệ vàng</option>
+                <option value="khac">Khác / tư vấn</option>
+              </select>
+            </div>
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="contact-message">Nội dung</label>
+              <textarea class="contact-form__textarea" id="contact-message" name="message" rows="4"
+                placeholder="Số lượng, khối lượng (250g / 500g), địa chỉ giao hàng, ghi chú…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary contact-form__submit">Gửi yêu cầu</button>
           </form>
         </div>
       </div>
